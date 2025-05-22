@@ -38,4 +38,8 @@
   --spacing-panel-radius: 12px;
   --spacing-form-item-gap: 12px;
   --spacing-outside-panels: 12px;
+
+  /* Font Families */
+  --font-family-base: "Avenir", sans-serif;
+  --font-family-docs: "Helvetica Neue", Arial, sans-serif;
 } 

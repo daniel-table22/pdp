@@ -1,4 +1,12 @@
 <template>
+  <div class="panel">
+    <h2 style="color: var(--color-brand-green)">hello</h2>
+  </div>
+  <br>
+  <div class="panel2">
+    <h2 style="color: var(--color-brand-green)">goodbuye</h2>
+  </div>
+  <br>
   <div>
     <button @click="fetchData">Fetch Strapi Data</button>
     <pre v-if="result">{{ result }}</pre>
@@ -27,6 +35,16 @@ const fetchData = async () => {
 </script>
 
 <style scoped>
+.panel {
+  background: var(--color-background-accent);
+  padding-bottom: var(--spacing-panel-inner-row-gap);
+  padding-top: var( --spacing-panel-bottom-padding);
+}
+.panel2 {
+  background: var(--color-background-accent);
+  padding-top: var(--spacing-panel-inner-row-gap);
+  padding-bottom: var(--spacing-panel-radius);
+}
 button {
   margin: 2rem;
   padding: 0.5rem 1rem;

@@ -1,0 +1,274 @@
+{
+  "font": {
+    "h2": {
+      "type": "custom-fontStyle",
+      "value": {
+        "fontSize": 24,
+        "textDecoration": "none",
+        "fontFamily": "Avenir",
+        "fontWeight": 900,
+        "fontStyle": "normal",
+        "fontStretch": "normal",
+        "letterSpacing": 0,
+        "lineHeight": 32,
+        "paragraphIndent": 0,
+        "paragraphSpacing": 0,
+        "textCase": "none"
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:5bedc7bba7e2f1af96dc2e5864ffa2bdef6e26ee,",
+          "exportKey": "font"
+        }
+      }
+    },
+    "h3": {
+      "type": "custom-fontStyle",
+      "value": {
+        "fontSize": 21,
+        "textDecoration": "none",
+        "fontFamily": "Avenir",
+        "fontWeight": 900,
+        "fontStyle": "normal",
+        "fontStretch": "normal",
+        "letterSpacing": 0,
+        "lineHeight": 28,
+        "paragraphIndent": 0,
+        "paragraphSpacing": 0,
+        "textCase": "none"
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:54b26461d28edb85f18c7e8e2a675ba5f8ac38b7,",
+          "exportKey": "font"
+        }
+      }
+    },
+    "h4": {
+      "type": "custom-fontStyle",
+      "value": {
+        "fontSize": 16,
+        "textDecoration": "none",
+        "fontFamily": "Avenir",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontStretch": "normal",
+        "letterSpacing": 0,
+        "lineHeight": 24,
+        "paragraphIndent": 0,
+        "paragraphSpacing": 12,
+        "textCase": "none"
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:cb7cd6825e1ff6a652b2c273b75f8e7cb82d0e51,",
+          "exportKey": "font"
+        }
+      }
+    },
+    "body": {
+      "type": "custom-fontStyle",
+      "value": {
+        "fontSize": 16,
+        "textDecoration": "none",
+        "fontFamily": "Avenir",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontStretch": "normal",
+        "letterSpacing": 0,
+        "lineHeight": 20,
+        "paragraphIndent": 0,
+        "paragraphSpacing": 0,
+        "textCase": "none"
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:030f17dc083a19070fe8ff59db974234c0d9d80d,",
+          "exportKey": "font"
+        }
+      }
+    },
+    "body small": {
+      "type": "custom-fontStyle",
+      "value": {
+        "fontSize": 14,
+        "textDecoration": "none",
+        "fontFamily": "Avenir",
+        "fontWeight": 400,
+        "fontStyle": "normal",
+        "fontStretch": "normal",
+        "letterSpacing": 0,
+        "lineHeight": 18,
+        "paragraphIndent": 0,
+        "paragraphSpacing": 0,
+        "textCase": "none"
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:4e07263951d90bbc3800c8cc2aaba5f3a0fe3466,",
+          "exportKey": "font"
+        }
+      }
+    },
+    "body bold": {
+      "type": "custom-fontStyle",
+      "value": {
+        "fontSize": 16,
+        "textDecoration": "none",
+        "fontFamily": "Avenir",
+        "fontWeight": 900,
+        "fontStyle": "normal",
+        "fontStretch": "normal",
+        "letterSpacing": 0,
+        "lineHeight": 20,
+        "paragraphIndent": 0,
+        "paragraphSpacing": 0,
+        "textCase": "none"
+      },
+      "extensions": {
+        "org.lukasoppermann.figmaDesignTokens": {
+          "styleId": "S:053d3f847315b137acf93e3619b8eb8795347a90,",
+          "exportKey": "font"
+        }
+      }
+    },
+    "desktop only": {
+      "h2": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 32,
+          "textDecoration": "none",
+          "fontFamily": "Avenir",
+          "fontWeight": 400,
+          "fontStyle": "normal",
+          "fontStretch": "normal",
+          "letterSpacing": 0,
+          "lineHeight": 38.4,
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "textCase": "none"
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:b3bf12e7e105edf22d47e97f62b018ddf6d3ba17,",
+            "exportKey": "font"
+          }
+        }
+      },
+      "h3": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 24,
+          "textDecoration": "none",
+          "fontFamily": "Avenir",
+          "fontWeight": 500,
+          "fontStyle": "normal",
+          "fontStretch": "normal",
+          "letterSpacing": 0,
+          "lineHeight": 32,
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "textCase": "none"
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:16d0bae93f6edd409066004f1ded94572310449a,",
+            "exportKey": "font"
+          }
+        }
+      },
+      "h4": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 21,
+          "textDecoration": "none",
+          "fontFamily": "Avenir",
+          "fontWeight": 500,
+          "fontStyle": "normal",
+          "fontStretch": "normal",
+          "letterSpacing": 0,
+          "lineHeight": 32,
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "textCase": "none"
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:a98cf76555f28db1711a0592734e617c57d03cef,",
+            "exportKey": "font"
+          }
+        }
+      }
+    },
+    "form": {
+      "primary": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 16,
+          "textDecoration": "none",
+          "fontFamily": "Avenir",
+          "fontWeight": 900,
+          "fontStyle": "normal",
+          "fontStretch": "normal",
+          "letterSpacing": 0,
+          "lineHeight": 19.2,
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "textCase": "none"
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:1fa011c0bb82fc4a7bc3de9bc405d1ee4861ddd3,",
+            "exportKey": "font"
+          }
+        }
+      },
+      "secondary": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 16,
+          "textDecoration": "none",
+          "fontFamily": "Avenir",
+          "fontWeight": 400,
+          "fontStyle": "normal",
+          "fontStretch": "normal",
+          "letterSpacing": 0,
+          "lineHeight": 19.2,
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "textCase": "none"
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:9032e9b2b2aee6e265fc26aa42ba7c396e94bcde,",
+            "exportKey": "font"
+          }
+        }
+      }
+    },
+    "documentation": {
+      "header": {
+        "type": "custom-fontStyle",
+        "value": {
+          "fontSize": 28,
+          "textDecoration": "none",
+          "fontFamily": "Helvetica Neue",
+          "fontWeight": 500,
+          "fontStyle": "normal",
+          "fontStretch": "normal",
+          "letterSpacing": 0,
+          "lineHeight": 33.6,
+          "paragraphIndent": 0,
+          "paragraphSpacing": 0,
+          "textCase": "none"
+        },
+        "extensions": {
+          "org.lukasoppermann.figmaDesignTokens": {
+            "styleId": "S:65370b840942fe9259ec683582f2e5395cf847c0,",
+            "exportKey": "font"
+          }
+        }
+      }
+    }
+  }
+}

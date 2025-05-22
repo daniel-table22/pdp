@@ -1,0 +1,80 @@
+body {
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--font-family-base);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 32px;
+  margin: 0;
+}
+
+h3 {
+  font-family: var(--font-family-base);
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 28px;
+  margin: 0;
+}
+
+h4 {
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 0 12px 0;
+}
+
+.small {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+/* Form text styles */
+.form-primary {
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 19.2px;
+}
+.form-secondary {
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+}
+
+/* Documentation header */
+.docs-header {
+  font-family: var(--font-family-docs);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 33.6px;
+}
+
+@media (min-width: 1024px) {
+  h2 {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 38.4px;
+  }
+  h3 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+  h4 {
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+} 
