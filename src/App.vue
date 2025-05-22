@@ -1,4 +1,5 @@
 <template>
+  <Hero />
   <div class="panel">
     <h2 style="color: var(--color-brand-green)">hello</h2>
   </div>
@@ -14,6 +15,7 @@
 </template>
 
 <script setup>
+import Hero from './components/Hero.vue'
 import { ref } from 'vue'
 
 const result = ref('')
