@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    Here test
+    Here test 2
     <Hero />
     <div class="bottom">
       <div class="left">
@@ -53,9 +53,13 @@ onMounted(async () => {
 
 <style scoped>
 .app {
+  margin: 0 auto;
+}
+
+.app {
   min-height: 100vh;
   max-width: 1280px;
-
+  padding: 12px;
   background-color: var(--color-background-page);
   display: flex;
   flex-direction: column;

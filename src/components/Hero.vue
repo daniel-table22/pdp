@@ -7,7 +7,7 @@
                     {{ currentBusiness?.heroRestaurantName || fallbackTitle }}
                 </div>
                 <p class="description">
-                    {{ currentBusiness?.heroMembershipName || fallbackDescription }}
+                    {{ currentBusiness?.mebershipDescription || fallbackDescription }}
                 </p>
             </div>
             <div class="rating">
