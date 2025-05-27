@@ -28,6 +28,7 @@ import Who from './components/Who.vue'
 import Membership from './components/Membership.vue'
 import { onMounted } from 'vue'
 import { useBusinessStore } from './stores/business.js'
+import { STRAPI_URL, STRAPI_TOKEN } from './config'
 
 const businessStore = useBusinessStore()
 const logo = businessStore.currentLogo
@@ -36,9 +37,9 @@ const menus = businessStore.currentMenus
 
 onMounted(async () => {
   try {
-    const res = await fetch('http://localhost:1337/api/businesses?populate[]=perks&populate[]=reviews&populate[]=menus.image&populate[]=heroCarousel&populate[]=variantGroup.variant&populate[]=variantGroup.image&populate[]=logo&populate[]=supportingMedia&populate[]=delivery&populate[]=offeringType', {
+    const res = await fetch(`${STRAPI_URL}/api/businesses?populate[]=perks&populate[]=reviews&populate[]=menus.image&populate[]=heroCarousel&populate[]=variantGroup.variant&populate[]=variantGroup.image&populate[]=logo&populate[]=supportingMedia&populate[]=delivery&populate[]=offeringType`, {
       headers: {
-        Authorization: 'Bearer c153ba748a898f1f8109eb9a6e9a409073c00e8a35ef9f7b063e7198b20e7ce77849ac188803e9df57750bcaf5728d1ef5138e3850d6b44100e67269897ad6aacd068be251c11c1db6445484dab0ead34bbe97bc7c40958ed69347742db7353d5536e0ea2b01290aa04a212549b4a1c270cdb479fb254bf09b855c8e22c06575'
+        Authorization: `Bearer ${STRAPI_TOKEN}`
       }
     })
     const data = await res.json()
