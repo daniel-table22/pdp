@@ -53,11 +53,12 @@ const selectedDeliveryIdx = ref(1) // Demo: select the second option (Pick-up)
 .membership {
     width: 400px;
     min-height: 700px;
-    background-color: #f5f5f5;
+    background-color: var(--color-background-panel);
     padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 24px;
+    border-radius: var(--spacing-panel-radius);
 }
 
 .header {

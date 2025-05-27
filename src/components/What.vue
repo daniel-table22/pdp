@@ -78,16 +78,9 @@ const prevMenu = () => {
     justify-content: center;
     align-items: flex-start;
     background: var(--color-background-panel);
-    gap: 32px;
 }
 
-.left {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    flex: 1;
-    width: 50%;
-}
+
 
 .header {
     width: 100%;
@@ -119,9 +112,19 @@ const prevMenu = () => {
     line-height: 20px;
 }
 
+
+
+.left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 394px;
+}
+
 .carousel {
+    width: 200px;
     position: relative;
-    width: 50%;
+    flex: 1;
     background: var(--color-background-invert-panel);
     border-radius: 12px;
     overflow: hidden;

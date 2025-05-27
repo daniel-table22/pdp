@@ -4,10 +4,10 @@
             <div class="content">
                 <img v-if="logo" class="logo" :src="logoUrl" :alt="logo.alternativeText || 'Logo'" />
                 <div class="title">
-                    {{ currentBusiness?.heroRestaurantName || fallbackTitle }}
+                    {{ currentBusiness?.heroMembershipName || fallbackTitle }}
                 </div>
                 <p class="description">
-                    {{ currentBusiness?.mebershipDescription || fallbackDescription }}
+                    {{ currentBusiness?.membershipDescription || fallbackDescription }}
                 </p>
             </div>
             <div class="rating">
