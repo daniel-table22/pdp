@@ -1,11 +1,10 @@
 <template>
   <div class="app">
     <div class="business-selector">
-      <button v-for="business in businessStore.businesses" :key="business.id"
-        :class="{ active: businessStore.currentBusiness?.id === business.id }"
-        @click="businessStore.setCurrentBusiness(business)">
+      <router-link v-for="business in businessStore.businesses" :key="business.id" :to="`/business/${business.id}`"
+        class="business-link" :class="{ active: businessStore.currentBusiness?.id === business.id }">
         {{ business.heroRestaurantName }}
-      </button>
+      </router-link>
     </div>
     <Hero />
     <div class="bottom">
@@ -16,6 +15,7 @@
       </div>
       <Membership />
     </div>
+    <Reviews />
     <div class="panel">
       <h2 style="color: var(--color-brand-green)">hellllo</h2>
     </div>
@@ -32,14 +32,18 @@ import What from './components/What.vue'
 import How from './components/How.vue'
 import Who from './components/Who.vue'
 import Membership from './components/Membership.vue'
-import { onMounted } from 'vue'
+import Reviews from './components/Reviews.vue'
+import { onMounted, watch } from 'vue'
 import { useBusinessStore } from './stores/business.js'
 import { STRAPI_URL, STRAPI_TOKEN } from './config'
+import { useRoute, useRouter } from 'vue-router'
 
 const businessStore = useBusinessStore()
 const logo = businessStore.currentLogo
 const perks = businessStore.currentPerks
 const menus = businessStore.currentMenus
+const route = useRoute()
+const router = useRouter()
 
 onMounted(async () => {
   try {
@@ -51,11 +55,27 @@ onMounted(async () => {
     const data = await res.json()
     console.log('Strapi API response:', data)
     businessStore.setBusinesses(data.data)
+    // After businesses are loaded, select the business from the route if present
+    if (route.params.id) {
+      const business = businessStore.businesses.find(b => b.id == route.params.id)
+      if (business) businessStore.setCurrentBusiness(business)
+    }
   } catch (e) {
     // handle error if needed
     console.error('Failed to fetch businesses:', e)
   }
 })
+
+// Watch for route changes and update the selected business
+watch(
+  () => route.params.id,
+  (id) => {
+    if (id) {
+      const business = businessStore.businesses.find(b => b.id == id)
+      if (business) businessStore.setCurrentBusiness(business)
+    }
+  }
+)
 </script>
 
 <style scoped>
@@ -73,7 +93,7 @@ onMounted(async () => {
   overflow-x: auto;
 }
 
-.business-selector button {
+.business-link {
   margin: 0;
   padding: 8px 16px;
   border: 1px solid var(--color-border);
@@ -83,13 +103,15 @@ onMounted(async () => {
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.business-selector button:hover {
+.business-link:hover {
   background-color: var(--color-background-hover);
 }
 
-.business-selector button.active {
+.business-link.active {
   background-color: var(--color-brand-green);
   color: white;
   border-color: var(--color-brand-green);
