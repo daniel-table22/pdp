@@ -1,6 +1,8 @@
 <template>
   <div class="header-atom">
-    <h3><slot>Header</slot></h3>
+    <h3>
+      <slot>-- Header --</slot>
+    </h3>
   </div>
 </template>
 
@@ -19,7 +21,8 @@
   position: relative;
   width: 100%;
 }
+
 h3 {
   color: var(--color-foreground-base);
 }
-</style> 
+</style>

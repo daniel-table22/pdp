@@ -1,6 +1,12 @@
 <template>
   <div class="app">
-    Here test 2
+    <div class="business-selector">
+      <button v-for="business in businessStore.businesses" :key="business.id"
+        :class="{ active: businessStore.currentBusiness?.id === business.id }"
+        @click="businessStore.setCurrentBusiness(business)">
+        {{ business.heroRestaurantName }}
+      </button>
+    </div>
     <Hero />
     <div class="bottom">
       <div class="left">
@@ -43,6 +49,7 @@ onMounted(async () => {
       }
     })
     const data = await res.json()
+    console.log('Strapi API response:', data)
     businessStore.setBusinesses(data.data)
   } catch (e) {
     // handle error if needed
@@ -54,6 +61,38 @@ onMounted(async () => {
 <style scoped>
 .app {
   margin: 0 auto;
+}
+
+.business-selector {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--color-background-page);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 12px;
+  overflow-x: auto;
+}
+
+.business-selector button {
+  margin: 0;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-background-page);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.business-selector button:hover {
+  background-color: var(--color-background-hover);
+}
+
+.business-selector button.active {
+  background-color: var(--color-brand-green);
+  color: white;
+  border-color: var(--color-brand-green);
 }
 
 .app {

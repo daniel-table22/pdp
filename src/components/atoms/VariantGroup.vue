@@ -3,10 +3,10 @@
         <div class="header">
             <div class="info">
                 <div class="title form-primary">
-                    <slot name="title">{{ title }}</slot>
+                    <slot name="title">-- {{ title }} --</slot>
                 </div>
                 <div class="description form-secondary">
-                    <slot name="description">{{ description }}</slot>
+                    <slot name="description">-- {{ description }} --</slot>
                 </div>
             </div>
             <slot name="image">

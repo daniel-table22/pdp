@@ -57,6 +57,12 @@ export const useBusinessStore = defineStore('business', {
     setBusinesses(data) {
       this.businesses = data
     },
+    setCurrentBusiness(business) {
+      const index = this.businesses.findIndex(b => b.id === business.id)
+      if (index !== -1) {
+        this.currentIndex = index
+      }
+    },
     next() {
       if (this.businesses.length > 0) {
         this.currentIndex = (this.currentIndex + 1) % this.businesses.length

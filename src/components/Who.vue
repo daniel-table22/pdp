@@ -28,8 +28,8 @@ const currentBusiness = computed(() => businessStore.currentBusiness)
 const supportingMedia = computed(() => currentBusiness.value?.supportingMedia?.[0] || null)
 const supportingMediaUrl = computed(() => supportingMedia.value ? getStrapiMedia(supportingMedia.value.url) : null)
 
-const fallbackDescription = "We're a group of friends who love to cook and eat. We're not chefs, but we're good at it."
-const fallbackChefName = 'Chef name'
+const fallbackDescription = "-- We're a group of friends who love to cook and eat. We're not chefs, but we're good at it. --"
+const fallbackChefName = '-- Chef name --'
 </script>
 
 <style scoped>

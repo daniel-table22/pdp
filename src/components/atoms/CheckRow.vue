@@ -2,14 +2,14 @@
     <div class="check-row" :class="{ selected }">
         <div class="info">
             <div class="title form-primary">
-                <slot name="title">{{ title }}</slot>
+                <slot name="title">-- {{ title }} --</slot>
             </div>
             <div class="description form-secondary">
-                <slot name="description">{{ description }}</slot>
+                <slot name="description">-- {{ description }} --</slot>
             </div>
         </div>
         <div class="price form-primary">
-            <slot name="price">{{ price }}</slot>
+            <slot name="price">-- {{ price }} --</slot>
         </div>
         <div class="checkmark">
             <span v-if="selected" class="circle selected">✔</span>

@@ -3,27 +3,35 @@
         <div class="left">
             <Header class="header" />
             <div class="content">
-                <Subheader class="subheader" :text="currentBusiness?.whatYouGetTitle || fallbackTitle" />
+                <Subheader class="subheader">
+                    {{ currentBusiness?.whatYouGetTitle || fallbackTitle }}
+                </Subheader>
                 <p class="description body">
                     {{ currentBusiness?.whatYouGetDescription || fallbackDescription }}
                 </p>
-                <Subheader class="subheader" text="Member perks" />
+                <Subheader class="subheader">
+                    Member perks
+                </Subheader>
                 <div class="perks">
-                    <p v-for="perk in currentPerks" :key="perk.id" class="perk">
+                    <p v-for="perk in currentPerks" :key="perk.id" class="perk body">
                         {{ perk.title }}
                     </p>
                 </div>
+                <!-- <pre>currentBusiness: {{ currentBusiness }}</pre>
+                <pre>currentBusiness.menus: {{ currentBusiness?.menus }}</pre>
+                <pre>currentMenus: {{ currentMenus }}</pre> -->
             </div>
         </div>
         <div class="carousel">
-            <div class="carousel-card">
-                <img class="carousel-image" alt="What you get" :src="whatImageUrl" />
-            </div>
-            <div class="caption">
-                <div class="date">Example from March</div>
-                <p class="caption-title">
-                    {{ menuItemText }}
-                </p>
+            <div v-for="(menu, idx) in currentMenus" :key="menu.id" class="carousel-card"
+                v-show="idx === currentMenuIndex">
+                <div class="carousel-image" :style="{ backgroundImage: `url(${getMenuImageUrl(menu)})` }"></div>
+                <div class="caption">
+                    <div class="date">-- Example from March --</div>
+                    <p class="caption-title">
+                        {{ getMenuItemText(menu) }}
+                    </p>
+                </div>
             </div>
             <div class="controls">
                 <div class="chevron chevron-left" @click="prevMenu">‹</div>
@@ -46,17 +54,40 @@ const currentPerks = computed(() => businessStore.currentPerks)
 const currentMenus = computed(() => businessStore.currentMenus)
 const currentMenuIndex = ref(0)
 
-const fallbackTitle = 'A multi course meal'
-const fallbackDescription = 'A rotating multi-course tasting menu featuring signature dishes and seasonal specials'
-const fallbackMenuItem = 'Crispy daikon cakes with chili sauce, pickled lotus root salad, and shiso rice.'
+const fallbackTitle = '-- A multi course meal --'
+const fallbackDescription = '-- A rotating multi-course tasting menu featuring signature dishes and seasonal specials --'
+const fallbackMenuItem = '-- Crispy daikon cakes with chili sauce, pickled lotus root salad, and shiso rice. --'
 
-const menuItemText = computed(() => {
-    return currentMenus.value[0]?.description[0]?.children[0]?.children[0]?.text || fallbackMenuItem
-})
+function getMenuItemText(menu) {
+    if (!menu || !Array.isArray(menu.description) || menu.description.length === 0) return fallbackMenuItem;
+    const desc = menu.description[0];
+    // Handle both list and paragraph types
+    if (desc.type === 'list' && Array.isArray(desc.children) && desc.children.length > 0) {
+        // Get the first list item text
+        const firstListItem = desc.children[0];
+        if (firstListItem && Array.isArray(firstListItem.children) && firstListItem.children.length > 0) {
+            return firstListItem.children[0].text || fallbackMenuItem;
+        }
+    } else if (desc.type === 'paragraph' && Array.isArray(desc.children) && desc.children.length > 0) {
+        return desc.children[0].text || fallbackMenuItem;
+    }
+    return fallbackMenuItem;
+}
 
-// For now, we'll use a static image, but this could be updated to use a media field from Strapi
-const whatImageUrl = computed(() => {
-    return getStrapiMedia('/uploads/what.jpg')
+// Placeholder image (uploaded by user)
+const placeholderImage = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80'
+
+function getMenuImageUrl(menu) {
+    if (menu && Array.isArray(menu.image) && menu.image.length > 0 && menu.image[0].url) {
+        return menu.image[0].url;
+    }
+    return placeholderImage;
+}
+
+const carouselImageUrl = computed(() => {
+    // In the future, use a menu image here if available
+    // For now, use the placeholder for all menus
+    return placeholderImage
 })
 
 const nextMenu = () => {
@@ -80,45 +111,47 @@ const prevMenu = () => {
     background: var(--color-background-panel);
 }
 
-
-
 .header {
     width: 100%;
     background: transparent;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
 }
 
 .subheader {
     width: 100%;
 }
 
-.description {
-    color: var(--color-foreground-base-alpha);
-    font-size: 16px;
-    line-height: 24px;
-}
-
-.perks {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    color: var(--color-foreground-base-alpha);
-    font-size: 16px;
-    line-height: 20px;
-}
-
-
-
 .left {
     display: flex;
     flex-direction: column;
     gap: 24px;
     width: 394px;
+    padding: 0px 24px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .content {
+        display: flex;
+        padding-bottom: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        flex: 1 0 0;
+        align-self: stretch;
+
+        .description {
+            color: var(--color-foreground-base-alpha);
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        .perks {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            align-self: stretch;
+
+            .perk {}
+        }
+    }
 }
 
 .carousel {
@@ -139,9 +172,12 @@ const prevMenu = () => {
     }
 
     .carousel-image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         width: 100%;
         height: 356.85px;
-        object-fit: cover;
+        border-radius: 12px;
     }
 
     .caption {

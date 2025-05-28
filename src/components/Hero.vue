@@ -51,12 +51,12 @@ const logo = computed(() => businessStore.currentLogo)
 const currentHeroCarousel = computed(() => businessStore.currentHeroCarousel)
 const currentCarouselIndex = ref(0)
 
-const fallbackTitle = 'The Supper Club'
-const fallbackDescription = 'Each month we bring you a tasting menu featuring signature dishes to prepare at home, as well as some members-only surprises.'
+const fallbackTitle = '-- The Supper Club --'
+const fallbackDescription = '-- Each month we bring you a tasting menu featuring signature dishes to prepare at home, as well as some members-only surprises. --'
 const reviewText = computed(() => {
     return currentBusiness.value?.reviews?.length
         ? `${currentBusiness.value.reviews.length} reviews`
-        : '4.7 • based on 83 reviews'
+        : '-- 4.7 • based on 83 reviews --'
 })
 
 const logoUrl = computed(() => logo.value ? getStrapiMedia(logo.value.url) : null)
