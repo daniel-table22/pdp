@@ -34,8 +34,9 @@
   /* Spacing */
   --spacing-panel-inner-row-gap: 16px;
   --spacing-panel-side-padding: 12px;
+  --spacing-panel-radius: 12px; 
   --spacing-panel-bottom-padding: 24px;
-  --spacing-panel-radius: 12px;
+
   --spacing-form-item-gap: 12px;
   --spacing-outside-panels: 12px;
 

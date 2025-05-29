@@ -1,8 +1,9 @@
 <template>
     <div class="how">
-        <Header class="header" />
-        <img src="@/assets/images/steps.svg" alt="How it works" />
+        <Header class="header">How it works</Header>
+        <img class="diagram" src="@/assets/images/steps.svg" alt="How it works" />
         <div class="allergies body">
+            <hr>
             Allergies or travel plans? We’re flexible, cancel anytime
         </div>
     </div>
@@ -15,12 +16,30 @@ import Header from './atoms/Header.vue'
 <style scoped>
 .how {
     background: var(--Colors-background-panel, #FFF);
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 32px;
+    border-radius: var(--spacing-panel-radius);
+    overflow: hidden;
+}
+
+.diagram {
+    width: 100%;
+    height: auto;
 }
 
 .allergies {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 16px;
-    align-self: stretch;
+    width: 100%;
+    text-align: center;
+
+    hr {
+        width: 100%;
+        border: 1px solid var(--Colors-border-default, #E0E0E0);
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
 }
 </style>

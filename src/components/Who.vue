@@ -1,7 +1,7 @@
 <template>
   <div class="who">
     <div class="left">
-      <Header class="header" />
+      <Header class="header">Who you're supporting</Header>
       <div class="content">
         <div class="description body">
           {{ currentBusiness?.supportingDescription || fallbackDescription }}
@@ -40,7 +40,15 @@ const fallbackChefName = '-- Chef name --'
   align-self: stretch;
   border-radius: var(--Spacing-pannel-radius, 12px);
   background: var(--Colors-background-panel, #FFF);
-  height: 400px;
+  height: 384px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .left,
@@ -55,14 +63,14 @@ const fallbackChefName = '-- Chef name --'
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 32px;
 }
 
 .right {
   display: flex;
-  height: 391.5px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+  height: 100%;
 }
 
 .owner {}

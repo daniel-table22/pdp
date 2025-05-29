@@ -1,15 +1,25 @@
 <template>
-    <div class="reviews">
-        <h3>Reviews</h3>
-        <div v-if="reviews.length === 0" class="no-reviews">-- No reviews --</div>
-        <div v-else class="review-list">
-            <div v-for="review in reviews" :key="review.id" class="review">
-                <div class="review-header">
-                    <span class="review-date">{{ review.date }}</span>
-                    <span class="review-city">{{ review.city }}</span>
+    <div class="reviews-container">
+        <div class="left">
+            <Header class="reviews-title">Customer reviews</Header>
+        </div>
+        <div class="right">
+            <div v-if="reviews.length === 0" class="no-reviews">-- No reviews --</div>
+            <template v-else>
+                <div v-for="review in reviews" :key="review.id" class="review-item">
+                    <div class="review-meta bold">
+                        {{ new Date(review.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' }) }}
+                    </div>
+                    <div class="review-text body">
+                        {{ review.description }}
+                    </div>
+                    <div class="review-stars">
+                        <span v-for="n in 5" :key="n" class="star"
+                            :class="{ filled: n <= (review.stars || 4.5) }">★</span>
+                    </div>
                 </div>
-                <div class="review-description">{{ review.description }}</div>
-            </div>
+                <a class="reviews-readmore" href="#">Read more</a>
+            </template>
         </div>
     </div>
 </template>
@@ -17,42 +27,59 @@
 <script setup>
 import { computed } from 'vue'
 import { useBusinessStore } from '../stores/business'
+import Header from './atoms/Header.vue'
 
 const businessStore = useBusinessStore()
 const reviews = computed(() => businessStore.currentReviews)
 </script>
 
 <style scoped>
-.reviews {
-    margin-top: 24px;
-    padding: 16px;
+.reviews-container {
+    display: flex;
+    border-radius: var(--spacing-panel-radius);
     background: var(--color-background-panel);
-    border-radius: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 24px;
+    gap: 24px;
 }
 
-.review-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.left {
+    width: 240px;
 }
 
-.review {
-    padding: 12px;
-    border-radius: 8px;
-    background: #f8f8f8;
+.right {
+    padding-top: 48px;
 }
 
-.review-header {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 4px;
-    display: flex;
-    gap: 12px;
+.review-item {
+    margin-bottom: 16px;
 }
 
-.review-description {
-    font-size: 16px;
-    color: var(--color-foreground-base);
+
+
+.review-stars {
+    color: #FFC700;
+    font-size: 16[px];
+    margin-bottom: 8px;
+}
+
+.star {
+    color: #FFC700;
+    margin-right: 2px;
+}
+
+.star.filled {
+    color: #FFC700;
+}
+
+.reviews-readmore {
+    color: #111;
+    font-size: 1.15rem;
+    text-decoration: underline;
+    font-weight: 500;
+    margin-top: 24px;
+    display: inline-block;
 }
 
 .no-reviews {

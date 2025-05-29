@@ -1,7 +1,7 @@
 <template>
     <div class="what-you-get">
         <div class="left">
-            <Header class="header" />
+            <Header class="header">What you get</Header>
             <div class="content">
                 <Subheader class="subheader">
                     {{ currentBusiness?.whatYouGetTitle || fallbackTitle }}
@@ -23,14 +23,15 @@
             </div>
         </div>
         <div class="carousel">
-            <div v-for="(menu, idx) in currentMenus" :key="menu.id" class="carousel-card"
-                v-show="idx === currentMenuIndex">
-                <div class="carousel-image" :style="{ backgroundImage: `url(${getMenuImageUrl(menu)})` }"></div>
-                <div class="caption">
-                    <div class="date">-- Example from March --</div>
-                    <p class="caption-title">
-                        {{ getMenuItemText(menu) }}
-                    </p>
+            <div class="carousel-track" :class="slideDirection" :key="currentMenuIndex">
+                <div v-for="(card, idx) in visibleCards" :key="idx" class="carousel-card">
+                    <div class="carousel-image" :style="{ backgroundImage: `url(${card.image})` }"></div>
+                    <div class="caption">
+                        <div class="date">{{ card.title }}</div>
+                        <p class="caption-title">
+                            {{ card.caption }}
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="controls">
@@ -42,7 +43,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useBusinessStore } from '../stores/business'
 import { getStrapiMedia } from '../utils/strapi'
 import Header from './atoms/Header.vue'
@@ -53,6 +54,8 @@ const currentBusiness = computed(() => businessStore.currentBusiness)
 const currentPerks = computed(() => businessStore.currentPerks)
 const currentMenus = computed(() => businessStore.currentMenus)
 const currentMenuIndex = ref(0)
+const isSliding = ref(false)
+const slideDirection = ref('')
 
 const fallbackTitle = '-- A multi course meal --'
 const fallbackDescription = '-- A rotating multi-course tasting menu featuring signature dishes and seasonal specials --'
@@ -84,23 +87,60 @@ function getMenuImageUrl(menu) {
     return placeholderImage;
 }
 
-const carouselImageUrl = computed(() => {
-    // In the future, use a menu image here if available
-    // For now, use the placeholder for all menus
-    return placeholderImage
+const nextMenuIndex = computed(() => {
+    if (!currentMenus.value.length) return 0
+    return (currentMenuIndex.value + 1) % currentMenus.value.length
+})
+const prevMenuIndex = computed(() => {
+    if (!currentMenus.value.length) return 0
+    return (currentMenuIndex.value - 1 + currentMenus.value.length) % currentMenus.value.length
 })
 
-const nextMenu = () => {
-    if (currentMenus.value.length > 0) {
-        currentMenuIndex.value = (currentMenuIndex.value + 1) % currentMenus.value.length
+const visibleCards = computed(() => {
+    const getCard = idx => {
+        const menu = currentMenus.value[idx] || {}
+        return {
+            image: getMenuImageUrl(menu),
+            title: menu.title || '',
+            caption: getMenuItemText(menu)
+        }
     }
+    if (slideDirection.value === 'slide-left') {
+        return [getCard(currentMenuIndex.value), getCard(nextMenuIndex.value)]
+    } else if (slideDirection.value === 'slide-right') {
+        return [getCard(prevMenuIndex.value), getCard(currentMenuIndex.value)]
+    } else {
+        return [getCard(currentMenuIndex.value)]
+    }
+})
+
+function slideTo(nextIdx, direction) {
+    if (isSliding.value) return
+    slideDirection.value = direction
+    isSliding.value = true
+    setTimeout(() => {
+        currentMenuIndex.value = nextIdx
+        isSliding.value = false
+        slideDirection.value = ''
+    }, 500) // match CSS duration
 }
 
-const prevMenu = () => {
-    if (currentMenus.value.length > 0) {
-        currentMenuIndex.value = (currentMenuIndex.value - 1 + currentMenus.value.length) % currentMenus.value.length
-    }
+function nextMenu() {
+    slideTo(nextMenuIndex.value, 'slide-left')
 }
+function prevMenu() {
+    slideTo(prevMenuIndex.value, 'slide-right')
+}
+
+let interval = null
+onMounted(() => {
+    interval = setInterval(() => {
+        nextMenu()
+    }, 5000)
+})
+onUnmounted(() => {
+    if (interval) clearInterval(interval)
+})
 </script>
 
 <style scoped>
@@ -109,6 +149,9 @@ const prevMenu = () => {
     justify-content: center;
     align-items: flex-start;
     background: var(--color-background-panel);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 394px;
 }
 
 .header {
@@ -125,6 +168,7 @@ const prevMenu = () => {
     flex-direction: column;
     gap: 24px;
     width: 394px;
+    height: 100%;
     padding: 0px 24px;
     justify-content: space-between;
     align-items: flex-start;
@@ -159,74 +203,96 @@ const prevMenu = () => {
     position: relative;
     flex: 1;
     background: var(--color-background-invert-panel);
-    border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+}
 
-    .carousel-card {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s cubic-bezier(.55, 0, .1, 1);
+    will-change: transform;
+}
 
-    .carousel-image {
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 356.85px;
-        border-radius: 12px;
-    }
+.carousel-track.slide-left {
+    transform: translateX(-100%);
+}
 
-    .caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 0, 0, 0.4);
-        color: #fff;
-        padding: 12px 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
+.carousel-track.slide-right {
+    transform: translateX(100%);
+}
 
-    .date {
-        font-size: 14px;
-        opacity: 0.6;
-        white-space: nowrap;
-    }
+.carousel-card {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-direction: column;
+}
 
-    .caption-title {
-        font-size: 16px;
-        line-height: 24px;
-    }
+.carousel-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
 
-    .controls {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 16px;
-        transform: translateY(-50%);
-    }
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: rgba(27, 27, 27, 0.4);
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 
-    .chevron {
-        background: var(--color-foreground-invert);
-        border-radius: 100px;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        cursor: pointer;
-        user-select: none;
-    }
+.date {
+    font-size: 14px;
+    opacity: 0.6;
+    white-space: nowrap;
+}
+
+.caption-title {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    transform: translateY(-50%);
+}
+
+.chevron {
+    background: var(--color-foreground-invert);
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .perk {

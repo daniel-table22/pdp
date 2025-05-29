@@ -1,128 +1,328 @@
 {
-    "data": [
-      {
-        "id": 14,
-        "documentId": "ezg1dn0vpyswwc8zb0danc6s",
-        "businessType": "restaurant",
-        "heroRestaurantName": "The Slanted Door",
-        "heroMembershipName": "Supper Club",
-        "whatYouGetTitle": "A meal",
-        "whatYouGetDescription": "A lovely 3 course meal",
-        "supportingDescription": "Supporting description medium long text",
-        "createdAt": "2025-05-22T18:32:22.887Z",
-        "updatedAt": "2025-05-27T21:19:05.355Z",
-        "publishedAt": "2025-05-27T21:19:05.373Z",
-        "supportingChefname": "Chef name",
-        "membershipPrice": "120",
-        "membershipDate": "Jum 28th",
-        "membershipDescription": "Each month we bring you a tasting menu featuring signature dishes to enjoy at home, and some members-only surprises.",
-        "supportingMedia": [
-          {
-            "id": 2,
-            "documentId": "z1i7yca52x7e6g2wqp3irthd",
-            "name": "who.jpg",
-            "alternativeText": null,
-            "caption": null,
-            "width": 434,
-            "height": 392,
-            "formats": {
-              "thumbnail": {
-                "name": "thumbnail_who.jpg",
-                "hash": "thumbnail_who_5d2ca0f5c8",
-                "ext": ".jpg",
-                "mime": "image/jpeg",
-                "path": null,
-                "width": 173,
-                "height": 156,
-                "size": 5.86,
-                "sizeInBytes": 5859,
-                "url": "/uploads/thumbnail_who_5d2ca0f5c8.jpg"
-              }
-            },
-            "hash": "who_5d2ca0f5c8",
-            "ext": ".jpg",
-            "mime": "image/jpeg",
-            "size": 22.75,
-            "url": "/uploads/who_5d2ca0f5c8.jpg",
-            "previewUrl": null,
-            "provider": "local",
-            "provider_metadata": null,
-            "createdAt": "2025-05-22T22:44:23.813Z",
-            "updatedAt": "2025-05-23T16:39:22.166Z",
-            "publishedAt": "2025-05-22T22:44:23.813Z"
-          }
-        ],
-        "perks": [
-          { "id": 37, "title": "Perk 1" },
-          { "id": 38, "title": "Perk 2" },
-          { "id": 39, "title": "Perk 3" }
-        ],
-        "reviews": [
-          { "id": 25, "date": "2025-05-08", "city": "San Francisco", "description": "Review 1" },
-          { "id": 26, "date": "2025-05-08", "city": "San Francisco", "description": "Review 2" }
-        ],
-        "menus": [
-          {
-            "id": 19,
-            "title": "Menu title 1",
-            "description": [
-              {
-                "type": "list",
-                "format": "unordered",
-                "children": [
-                  {
-                    "type": "list-item",
-                    "children": [
-                      { "type": "text", "text": "Heirloom Tomato Salad – basil, burrata, balsamic glaze" }
-                    ]
-                  },
-                  {
-                    "type": "list-item",
-                    "children": [
-                      { "type": "text", "text": "Spicy Tuna Tartare – avocado, wonton crisps" }
-                    ]
-                  },
-                  {
-                    "type": "list-item",
-                    "children": [
-                      { "type": "text", "text": "Roasted Cauliflower – tahini, lemon, pomegranate seeds" }
-                    ]
-                  }
-                ]
-              }
-            ]
+  "data": [
+    {
+      "id": 22,
+      "documentId": "ezg1dn0vpyswwc8zb0danc6s",
+      "businessType": "restaurant",
+      "heroRestaurantName": "Slanted Door",
+      "heroMembershipName": "Le Supper Club",
+      "whatYouGetTitle": "A multi-course at home meal",
+      "whatYouGetDescription": "A rotating multi-course tasting menu featuring signature dishes and seasonal specials",
+      "supportingDescription": "I grew up watching my aunt cook and exploring San Francisco's food scene. Instead of a night out, I wanted to create something you could enjoy at home—relaxed, personal, and just as special.",
+      "createdAt": "2025-05-22T18:32:22.887Z",
+      "updatedAt": "2025-05-29T03:45:23.942Z",
+      "publishedAt": "2025-05-29T03:45:24.224Z",
+      "supportingChefname": "Chef Alex Hong",
+      "membershipPrice": "120",
+      "membershipDate": "Jum 28th",
+      "membershipDescription": "Each month we bring you a tasting menu featuring signature dishes to prepare at home, as well as some members-only surprises. ",
+      "supportingMedia": [
+        {
+          "id": 10,
+          "documentId": "z1i7yca52x7e6g2wqp3irthd",
+          "name": "who.jpg",
+          "alternativeText": null,
+          "caption": null,
+          "width": 434,
+          "height": 392,
+          "formats": {
+            "thumbnail": {
+              "ext": ".jpg",
+              "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/thumbnail_who_5d2ca0f5c8.jpg",
+              "hash": "thumbnail_who_5d2ca0f5c8",
+              "mime": "image/jpeg",
+              "name": "thumbnail_who.jpg",
+              "path": null,
+              "size": 5.86,
+              "width": 173,
+              "height": 156,
+              "sizeInBytes": 5859
+            }
           },
-          {
-            "id": 20,
-            "title": "Menu 2 title",
-            "description": [
-              {
-                "type": "list",
-                "format": "unordered",
-                "children": [
-                  {
-                    "type": "list-item",
-                    "children": [
-                      { "type": "text", "text": "Molten Chocolate Cake – vanilla ice cream" }
-                    ]
-                  },
-                  {
-                    "type": "list-item",
-                    "children": [
-                      { "type": "text", "text": "Citrus Olive Oil Cake – whipped mascarpone" }
-                    ]
-                  },
-                  {
-                    "type": "list-item",
-                    "children": [
-                      { "type": "text", "text": "Seasonal Fruit Sorbet – rotating flavors" }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+          "hash": "who_5d2ca0f5c8",
+          "ext": ".jpg",
+          "mime": "image/jpeg",
+          "size": 22.75,
+          "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/who_5d2ca0f5c8.jpg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-strapi-cloud",
+          "provider_metadata": null,
+          "createdAt": "2025-05-22T22:44:23.813Z",
+          "updatedAt": "2025-05-23T16:39:22.166Z",
+          "publishedAt": "2025-05-22T22:44:23.813Z"
+        }
+      ],
+      "perks": [
+        {
+          "id": 49,
+          "title": "Complimentary drink when you visit us"
+        },
+        {
+          "id": 50,
+          "title": "Reservation privileges"
+        },
+        {
+          "id": 51,
+          "title": "Recipe library"
+        }
+      ],
+      "reviews": [
+        {
+          "id": 43,
+          "date": "2025-05-08",
+          "city": "San Francisco",
+          "description": "Review 1"
+        },
+        {
+          "id": 44,
+          "date": "2025-05-08",
+          "city": "San Francisco",
+          "description": "Review 2"
+        }
+      ],
+      "menus": [
+        {
+          "id": 48,
+          "title": "March '25",
+          "description": [
+            {
+              "type": "list",
+              "format": "unordered",
+              "children": [
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Heirloom Tomato Salad – basil, burrata, balsamic glaze",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Spicy Tuna Tartare – avocado, wonton crisps",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Roasted Cauliflower – tahini, lemon, pomegranate seeds",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 49,
+          "title": "Feb '25",
+          "description": [
+            {
+              "type": "list",
+              "format": "unordered",
+              "children": [
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Molten Chocolate Cake – vanilla ice cream",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Citrus Olive Oil Cake – whipped mascarpone",
+                      "type": "text"
+                    }
+                  ]
+                },
+                {
+                  "type": "list-item",
+                  "children": [
+                    {
+                      "text": "Seasonal Fruit Sorbet – rotating flavors",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 50,
+          "title": "Jan '25",
+          "description": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "text": "Lorem ipsum dolor",
+                  "type": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "heroCarousel": [
+        {
+          "id": 13,
+          "documentId": "uqxqc6zup2si3tol1qlzwd1k",
+          "name": "hero2.jpg",
+          "alternativeText": null,
+          "caption": null,
+          "width": 393,
+          "height": 262,
+          "formats": {
+            "thumbnail": {
+              "ext": ".jpg",
+              "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/thumbnail_hero2_33e1912216.jpg",
+              "hash": "thumbnail_hero2_33e1912216",
+              "mime": "image/jpeg",
+              "name": "thumbnail_hero2.jpg",
+              "path": null,
+              "size": 7.56,
+              "width": 234,
+              "height": 156,
+              "sizeInBytes": 7560
+            }
+          },
+          "hash": "hero2_33e1912216",
+          "ext": ".jpg",
+          "mime": "image/jpeg",
+          "size": 16.91,
+          "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/hero2_33e1912216.jpg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-strapi-cloud",
+          "provider_metadata": null,
+          "createdAt": "2025-05-23T16:45:07.239Z",
+          "updatedAt": "2025-05-23T16:45:07.239Z",
+          "publishedAt": "2025-05-23T16:45:07.240Z"
+        },
+        {
+          "id": 12,
+          "documentId": "p8oyuli90e2k3l0azkhs7mpx",
+          "name": "hero.jpg",
+          "alternativeText": null,
+          "caption": null,
+          "width": 628,
+          "height": 419,
+          "formats": {
+            "small": {
+              "ext": ".jpg",
+              "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/small_hero_a5ad130c8b.jpg",
+              "hash": "small_hero_a5ad130c8b",
+              "mime": "image/jpeg",
+              "name": "small_hero.jpg",
+              "path": null,
+              "size": 44.32,
+              "width": 500,
+              "height": 334,
+              "sizeInBytes": 44319
+            },
+            "thumbnail": {
+              "ext": ".jpg",
+              "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/thumbnail_hero_a5ad130c8b.jpg",
+              "hash": "thumbnail_hero_a5ad130c8b",
+              "mime": "image/jpeg",
+              "name": "thumbnail_hero.jpg",
+              "path": null,
+              "size": 12.68,
+              "width": 234,
+              "height": 156,
+              "sizeInBytes": 12675
+            }
+          },
+          "hash": "hero_a5ad130c8b",
+          "ext": ".jpg",
+          "mime": "image/jpeg",
+          "size": 62.88,
+          "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/hero_a5ad130c8b.jpg",
+          "previewUrl": null,
+          "provider": "strapi-provider-upload-strapi-cloud",
+          "provider_metadata": null,
+          "createdAt": "2025-05-22T22:44:23.824Z",
+          "updatedAt": "2025-05-28T18:59:49.019Z",
+          "publishedAt": "2025-05-22T22:44:23.824Z"
+        }
+      ],
+      "variantGroup": [
+        {
+          "id": 15,
+          "title": "wine pairing",
+          "description": "chef's rec"
+        }
+      ],
+      "logo": {
+        "id": 9,
+        "documentId": "ltla1inqaleyenypgwwrwbpt",
+        "name": "logo.png",
+        "alternativeText": null,
+        "caption": null,
+        "width": 112,
+        "height": 49,
+        "formats": null,
+        "hash": "logo_9edaef3146",
+        "ext": ".png",
+        "mime": "image/png",
+        "size": 1.7,
+        "url": "https://majestic-rhythm-cd26cbae12.media.strapiapp.com/logo_9edaef3146.png",
+        "previewUrl": null,
+        "provider": "strapi-provider-upload-strapi-cloud",
+        "provider_metadata": null,
+        "createdAt": "2025-05-22T22:44:23.774Z",
+        "updatedAt": "2025-05-22T22:44:23.774Z",
+        "publishedAt": "2025-05-22T22:44:23.775Z"
+      },
+      "delivery": [
+        {
+          "id": 45,
+          "type": "Pickup",
+          "description": "from address"
+        },
+        {
+          "id": 46,
+          "type": "Delivery",
+          "description": "+$15"
+        },
+        {
+          "id": 47,
+          "type": "Pickup",
+          "description": "from address 2"
+        },
+        {
+          "id": 48,
+          "type": "Delivery",
+          "description": "+$15"
+        }
+      ],
+      "offeringType": [
+        {
+          "id": 73,
+          "title": "For 2",
+          "description": "You and partner",
+          "price": null
+        },
+        {
+          "id": 74,
+          "title": "For 4",
+          "description": "For the family",
+          "price": null
+        }
+      ]
+    }
+  ]
+}
+
+{"data":[{"id":22,"documentId":"ezg1dn0vpyswwc8zb0danc6s","businessType":"restaurant","heroRestaurantName":"Slanted Door","heroMembershipName":"Le Supper Club","whatYouGetTitle":"A multi-course at home meal","whatYouGetDescription":"A rotating multi-course tasting menu featuring signature dishes and seasonal specials","supportingDescription":"I grew up watching my aunt cook and exploring San Francisco’s food scene. Instead of a night out, I wanted to create something you could enjoy at home—relaxed, personal, and just as special.","createdAt":"2025-05-22T18:32:22.887Z","updatedAt":"2025-05-29T03:45:23.942Z","publishedAt":"2025-05-29T03:45:24.224Z","supportingChefname":"Chef Alex Hong","membershipPrice":"120","membershipDate":"Jum 28th","membershipDescription":"Each month we bring you a tasting menu featuring signature dishes to prepare at home, as well as some members-only surprises. ","supportingMedia":[{"id":10,"documentId":"z1i7yca52x7e6g2wqp3irthd","name":"who.jpg","alternativeText":null,"caption":null,"width":434,"height":392,"formats":{"thumbnail":{"ext":".jpg","url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/thumbnail_who_5d2ca0f5c8.jpg","hash":"thumbnail_who_5d2ca0f5c8","mime":"image/jpeg","name":"thumbnail_who.jpg","path":null,"size":5.86,"width":173,"height":156,"sizeInBytes":5859}},"hash":"who_5d2ca0f5c8","ext":".jpg","mime":"image/jpeg","size":22.75,"url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/who_5d2ca0f5c8.jpg","previewUrl":null,"provider":"strapi-provider-upload-strapi-cloud","provider_metadata":null,"createdAt":"2025-05-22T22:44:23.813Z","updatedAt":"2025-05-23T16:39:22.166Z","publishedAt":"2025-05-22T22:44:23.813Z"}],"perks":[{"id":49,"title":"Complimentary drink when you visit us"},{"id":50,"title":"Reservation privileges"},{"id":51,"title":"Recipe library"}],"reviews":[{"id":43,"date":"2025-05-08","city":"San Francisco","description":"Review 1"},{"id":44,"date":"2025-05-08","city":"San Francisco","description":"Review 2"}],"menus":[{"id":48,"title":"March '25","description":[{"type":"list","format":"unordered","children":[{"type":"list-item","children":[{"text":"Heirloom Tomato Salad – basil, burrata, balsamic glaze","type":"text"}]},{"type":"list-item","children":[{"text":"Spicy Tuna Tartare – avocado, wonton crisps","type":"text"}]},{"type":"list-item","children":[{"text":"Roasted Cauliflower – tahini, lemon, pomegranate seeds","type":"text"}]}]}]},{"id":49,"title":"Feb '25","description":[{"type":"list","format":"unordered","children":[{"type":"list-item","children":[{"text":"Molten Chocolate Cake – vanilla ice cream","type":"text"}]},{"type":"list-item","children":[{"text":"Citrus Olive Oil Cake – whipped mascarpone","type":"text"}]},{"type":"list-item","children":[{"text":"Seasonal Fruit Sorbet – rotating flavors","type":"text"}]}]}]},{"id":50,"title":"Jan '25","description":[{"type":"paragraph","children":[{"text":"Lorem ipsum dolor","type":"text"}]}]}],"heroCarousel":[{"id":13,"documentId":"uqxqc6zup2si3tol1qlzwd1k","name":"hero2.jpg","alternativeText":null,"caption":null,"width":393,"height":262,"formats":{"thumbnail":{"ext":".jpg","url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/thumbnail_hero2_33e1912216.jpg","hash":"thumbnail_hero2_33e1912216","mime":"image/jpeg","name":"thumbnail_hero2.jpg","path":null,"size":7.56,"width":234,"height":156,"sizeInBytes":7560}},"hash":"hero2_33e1912216","ext":".jpg","mime":"image/jpeg","size":16.91,"url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/hero2_33e1912216.jpg","previewUrl":null,"provider":"strapi-provider-upload-strapi-cloud","provider_metadata":null,"createdAt":"2025-05-23T16:45:07.239Z","updatedAt":"2025-05-23T16:45:07.239Z","publishedAt":"2025-05-23T16:45:07.240Z"},{"id":12,"documentId":"p8oyuli90e2k3l0azkhs7mpx","name":"hero.jpg","alternativeText":null,"caption":null,"width":628,"height":419,"formats":{"small":{"ext":".jpg","url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/small_hero_a5ad130c8b.jpg","hash":"small_hero_a5ad130c8b","mime":"image/jpeg","name":"small_hero.jpg","path":null,"size":44.32,"width":500,"height":334,"sizeInBytes":44319},"thumbnail":{"ext":".jpg","url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/thumbnail_hero_a5ad130c8b.jpg","hash":"thumbnail_hero_a5ad130c8b","mime":"image/jpeg","name":"thumbnail_hero.jpg","path":null,"size":12.68,"width":234,"height":156,"sizeInBytes":12675}},"hash":"hero_a5ad130c8b","ext":".jpg","mime":"image/jpeg","size":62.88,"url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/hero_a5ad130c8b.jpg","previewUrl":null,"provider":"strapi-provider-upload-strapi-cloud","provider_metadata":null,"createdAt":"2025-05-22T22:44:23.824Z","updatedAt":"2025-05-28T18:59:49.019Z","publishedAt":"2025-05-22T22:44:23.824Z"}],"variantGroup":[{"id":15,"title":"wine pairing","description":"chef's rec"}],"logo":{"id":9,"documentId":"ltla1inqaleyenypgwwrwbpt","name":"logo.png","alternativeText":null,"caption":null,"width":112,"height":49,"formats":null,"hash":"logo_9edaef3146","ext":".png","mime":"image/png","size":1.7,"url":"https://majestic-rhythm-cd26cbae12.media.strapiapp.com/logo_9edaef3146.png","previewUrl":null,"provider":"strapi-provider-upload-strapi-cloud","provider_metadata":null,"createdAt":"2025-05-22T22:44:23.774Z","updatedAt":"2025-05-22T22:44:23.774Z","publishedAt":"2025-05-22T22:44:23.775Z"},"delivery":[{"id":45,"type":"Pickup","description":"from address"},{"id":46,"type":"Delivery","description":"+$15"},{"id":47,"type":"Pickup","description":"from address 2"},{"id":48,"type":"Delivery","description":"+$15"}],"offeringType":[{"id":73,"title":"For 2","description":"You and partner","price":null},{"id":74,"title":"For 4","description":"For the

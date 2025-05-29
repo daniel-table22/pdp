@@ -1,5 +1,6 @@
 # PDP - Product Display Page
 
+Ready for Katie
 This is a Vue 3 application built with Vite that displays product information from a Strapi CMS.
 
 ## Development Setup

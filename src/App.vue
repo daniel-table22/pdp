@@ -12,17 +12,12 @@
         <What />
         <How />
         <Who />
+        <Reviews />
       </div>
       <Membership />
     </div>
-    <Reviews />
-    <div class="panel">
-      <h2 style="color: var(--color-brand-green)">hellllo</h2>
-    </div>
-    <br>
-    <div class="panel2">
-      <h2 style="color: var(--color-brand-green)">goodbuye</h2>
-    </div>
+
+
   </div>
 </template>
 

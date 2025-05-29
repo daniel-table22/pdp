@@ -1,10 +1,10 @@
 <template>
     <div class="check-inline">
-        <div class="title form-primary">
-            <slot name="title">-- {{ title }} --</slot>
+        <div class="title form-secondary">
+            <slot name="title">{{ title }}</slot>
         </div>
         <div class="price form-secondary">
-            <slot name="price">-- {{ price }} --</slot>
+            <slot name="price">{{ price }}</slot>
         </div>
         <div class="checkmark">
             <span v-if="selected" class="circle selected">✔</span>
@@ -26,10 +26,15 @@ defineProps({
     display: flex;
     align-items: center;
     background: var(--color-controls-bg);
-    border-radius: 8px;
-    padding: 8px 0;
+    padding-bottom: 14px;
+    padding-top: 14px;
     gap: 12px;
     min-width: 180px;
+    border-bottom: 1px solid var(--color-controls-inactive-stroke);
+
+    &:last-child {
+        border-bottom: none;
+    }
 }
 
 .title {

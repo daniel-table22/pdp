@@ -20,7 +20,7 @@
 
 h4 {
   color: var(--color-foreground-base);
-  font-weight: 400;
+  font-weight: 800;
   font-size: 16px;
   line-height: 24px;
   margin: 0;

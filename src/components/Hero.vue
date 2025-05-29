@@ -25,8 +25,10 @@
         </div>
         <div class="right">
             <div class="carousel">
-                <div v-if="currentHeroCarousel.length > 0" class="carousel-image"
-                    :style="{ backgroundImage: `url(${currentCarouselImage})` }"></div>
+                <div class="carousel-track" :class="slideDirection" :key="currentCarouselIndex">
+                    <div v-for="(img, idx) in visibleImages" :key="idx" class="carousel-image"
+                        :style="{ backgroundImage: `url(${img})` }"></div>
+                </div>
                 <div class="controls">
                     <div class="icon-outline-chevron-wrapper" @click="prevCarousel">
                         <span class="icon-outline-chevron">‹</span>
@@ -41,7 +43,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useBusinessStore } from '../stores/business'
 import { getStrapiMedia } from '../utils/strapi'
 
@@ -50,9 +52,11 @@ const currentBusiness = computed(() => businessStore.currentBusiness)
 const logo = computed(() => businessStore.currentLogo)
 const currentHeroCarousel = computed(() => businessStore.currentHeroCarousel)
 const currentCarouselIndex = ref(0)
+const isSliding = ref(false)
+const slideDirection = ref('')
 
-const fallbackTitle = '-- The Supper Club --'
-const fallbackDescription = '-- Each month we bring you a tasting menu featuring signature dishes to prepare at home, as well as some members-only surprises. --'
+const fallbackTitle = '-- Title --'
+const fallbackDescription = '-- Description. --'
 const reviewText = computed(() => {
     return currentBusiness.value?.reviews?.length
         ? `${currentBusiness.value.reviews.length} reviews`
@@ -64,18 +68,60 @@ const currentCarouselImage = computed(() => {
     if (!currentHeroCarousel.value.length) return null
     return getStrapiMedia(currentHeroCarousel.value[currentCarouselIndex.value].url)
 })
+const nextCarouselIndex = computed(() => {
+    if (!currentHeroCarousel.value.length) return 0
+    return (currentCarouselIndex.value + 1) % currentHeroCarousel.value.length
+})
+const prevCarouselIndex = computed(() => {
+    if (!currentHeroCarousel.value.length) return 0
+    return (currentCarouselIndex.value - 1 + currentHeroCarousel.value.length) % currentHeroCarousel.value.length
+})
+const nextCarouselImage = computed(() => {
+    if (!currentHeroCarousel.value.length) return null
+    return getStrapiMedia(currentHeroCarousel.value[nextCarouselIndex.value].url)
+})
+const prevCarouselImage = computed(() => {
+    if (!currentHeroCarousel.value.length) return null
+    return getStrapiMedia(currentHeroCarousel.value[prevCarouselIndex.value].url)
+})
 
-const nextCarousel = () => {
-    if (currentHeroCarousel.value.length > 0) {
-        currentCarouselIndex.value = (currentCarouselIndex.value + 1) % currentHeroCarousel.value.length
+const visibleImages = computed(() => {
+    if (slideDirection.value === 'slide-left') {
+        return [currentCarouselImage.value, nextCarouselImage.value]
+    } else if (slideDirection.value === 'slide-right') {
+        return [prevCarouselImage.value, currentCarouselImage.value]
+    } else {
+        return [currentCarouselImage.value]
     }
+})
+
+function slideTo(nextIdx, direction) {
+    if (isSliding.value) return
+    slideDirection.value = direction
+    isSliding.value = true
+    setTimeout(() => {
+        currentCarouselIndex.value = nextIdx
+        isSliding.value = false
+        slideDirection.value = ''
+    }, 500) // match CSS duration
 }
 
-const prevCarousel = () => {
-    if (currentHeroCarousel.value.length > 0) {
-        currentCarouselIndex.value = (currentCarouselIndex.value - 1 + currentHeroCarousel.value.length) % currentHeroCarousel.value.length
-    }
+function nextCarousel() {
+    slideTo(nextCarouselIndex.value, 'slide-left')
 }
+function prevCarousel() {
+    slideTo(prevCarouselIndex.value, 'slide-right')
+}
+
+let interval = null
+onMounted(() => {
+    interval = setInterval(() => {
+        nextCarousel()
+    }, 5000)
+})
+onUnmounted(() => {
+    if (interval) clearInterval(interval)
+})
 </script>
 
 <style scoped>
@@ -170,6 +216,35 @@ const prevCarousel = () => {
     width: 100%;
     border-radius: 0 20px 20px 0;
     position: relative;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s cubic-bezier(.55, 0, .1, 1);
+    will-change: transform;
+}
+
+.carousel-track.slide-left {
+    transform: translateX(-100%);
+}
+
+.carousel-track.slide-right {
+    transform: translateX(100%);
+}
+
+.carousel-image {
+    width: 100%;
+    height: 418.67px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 20px 20px 0;
+    flex-shrink: 0;
 }
 
 .controls {
@@ -194,14 +269,5 @@ const prevCarousel = () => {
     height: 40px;
     font-size: 24px;
     cursor: pointer;
-}
-
-.carousel-image {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 418.67px;
-    width: 100%;
-    border-radius: 0 20px 20px 0;
 }
 </style>
