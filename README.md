@@ -1,7 +1,14 @@
+
+# Trouble shooting
+Locally:
+When the front jsut says upgrade required it means you have multiple termina instances running the same server, jsut quit all of them then start a new one. 
+ n the cloud, make sure that on vercel you are running on the prod version not one of the deployments
+
+npm run dev
+
 # PDP - Product Display Page
 
-Ready for Katie
-This is a Vue 3 application built with Vite that displays product information from a Strapi CMS.
+
 
 ## Development Setup
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="variant-group">
+    <div :class="['variant-group', borderClass]">
         <div class="header">
             <div class="info">
                 <div class="title form-primary">
@@ -15,22 +15,28 @@
         </div>
         <div class="options">
             <slot />
-
         </div>
     </div>
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+const props = defineProps({
     title: String,
     description: String,
-    image: String // full URL
+    image: String, // full URL
+    selectedIndex: Number
 })
+const borderClass = computed(() =>
+    props.selectedIndex === 0
+        ? 'variant-group-neutral'
+        : 'variant-group-accent'
+)
 </script>
 
 <style scoped>
 .variant-group {
-    border: 2px solid var(--color-controls-accent-primary);
+    border: 2px solid var(--color-foreground-horizontal-rule, rgba(0, 0, 0, 0.1));
     background: var(--color-controls-bg);
     border-radius: 16px;
     padding: 16px 20px;
@@ -39,6 +45,10 @@ defineProps({
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.variant-group-accent {
+    border-color: var(--color-foreground-accent);
 }
 
 .header {

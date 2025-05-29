@@ -12,24 +12,33 @@
                         :description="type.description" :price="type.price"
                         :selected="type.id === business.offeringType[0]?.id" />
                 </div>
+
                 <div class="variant-groups">
                     <VariantGroup v-for="group in business.variantGroup || []" :key="group.id" :title="group.title"
                         :description="group.description"
-                        :image="group.image && group.image.url ? getStrapiMedia(group.image.url) : null">
-                        <CheckInline v-for="(item, idx) in group.variant || []" :key="item.id" :title="item.title"
-                            :description="item.description" :price="item.price" :selected="idx === 0" />
-                        <CheckInline v-for="item in group.variant || []" :key="item.id" :title="item.title"
-                            :description="item.description" :price="item.price" :selected="item.selected" />
+                        :image="group.image && group.image.url ? getStrapiMedia(group.image.url) : null"
+                        :selectedIndex="selectedVariantIndexes[group.id] ?? 0">
+                        <CheckInline v-for="(item, idx) in group.variant" :key="item.id" :title="item.title"
+                            :price="item.price" :selected="(selectedVariantIndexes[group.id] ?? 0) === idx"
+                            @click="handleVariantSelect(group.id, idx)" />
                     </VariantGroup>
                 </div>
+
+                <EditRow style="width: 100%;">
+                    <template #label>Dietary restrictions</template>
+                    <template #value>Edit</template>
+                </EditRow>
+
                 <div class="delivery-options">
                     <CheckTile v-for="(option, idx) in business.delivery || []" :key="option.id" :title="option.type"
-                        :price="option.description" :selected="idx === selectedDeliveryIdx">
-                        <template #icon>
-                            <span class="icon-default">👥</span>
-                        </template>
-                    </CheckTile>
+                        :price="option.description" :selected="idx === selectedDeliveryIdx"
+                        @click="selectedDeliveryIdx = idx" />
                 </div>
+
+                <ButtonPrimary>Become a member</ButtonPrimary>
+                <ButtonSecondary>Or gift membership</ButtonSecondary>
+
+                <ButtonTertiary>FAQ</ButtonTertiary>
             </div>
         </div>
     </div>
@@ -41,6 +50,11 @@ import CheckInline from './atoms/CheckInline.vue'
 import CheckTile from './atoms/CheckTile.vue'
 import CheckRow from './atoms/CheckRow.vue'
 import VariantGroup from './atoms/VariantGroup.vue'
+import EditRow from './atoms/EditRow.vue'
+import ButtonPrimary from './atoms/ButtonPrimary.vue'
+import ButtonSecondary from './atoms/ButtonSecondary.vue'
+import ButtonTertiary from './atoms/ButtonTertiary.vue'
+import FormTitle from './atoms/FormTitle.vue'
 import { useBusinessStore } from '../stores/business'
 import { computed, ref } from 'vue'
 import { getStrapiMedia } from '../utils/strapi'
@@ -48,6 +62,12 @@ import { getStrapiMedia } from '../utils/strapi'
 const businessStore = useBusinessStore()
 const business = computed(() => businessStore.currentBusiness)
 const selectedDeliveryIdx = ref(1) // Demo: select the second option (Pick-up)
+
+// Track selected index for each variant group
+const selectedVariantIndexes = ref({})
+function handleVariantSelect(groupId, idx) {
+    selectedVariantIndexes.value[groupId] = idx
+}
 </script>
 
 <style scoped>
@@ -61,7 +81,7 @@ const selectedDeliveryIdx = ref(1) // Demo: select the second option (Pick-up)
     padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
     border-radius: var(--spacing-panel-radius);
 }
 
@@ -107,5 +127,46 @@ const selectedDeliveryIdx = ref(1) // Demo: select the second option (Pick-up)
         /* Ensures reasonable minimum width */
         max-width: calc(50% - 6px);
     }
+}
+
+.dietary-restrictions-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 269px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--color-controls-inactive-stroke);
+    background: var(--color-controls-bg, #fff);
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    gap: 8px;
+
+}
+
+.label {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.value {
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--color-foreground-secondary, #888);
+    margin-left: 8px;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    padding: 0 0 0 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.edit-btn svg {
+    display: block;
 }
 </style>

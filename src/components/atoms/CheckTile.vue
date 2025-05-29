@@ -1,7 +1,16 @@
 <template>
-    <div class="check-tile" :class="{ selected }">
-        <div class="icon">
-            <slot name="icon"><span class="icon-default">👤</span></slot>
+    <div class="check-tile" :class="{ selected }" @click="$emit('click')">
+        <div class="tile-top">
+            <div class="icon">
+                <slot name="icon">
+                    <span v-if="isDelivery" class="icon-svg"><img src="../../assets/images/car.svg" alt="Car" /></span>
+                    <span v-else class="icon-svg"><img src="../../assets/images/home.svg" alt="Home" /></span>
+                </slot>
+            </div>
+            <div class="checkmark">
+                <span v-if="selected" class="circle selected">✔</span>
+                <span v-else class="circle"></span>
+            </div>
         </div>
         <div class="info">
             <div class="title form-primary">
@@ -11,65 +20,74 @@
                 <slot name="price">{{ price }}</slot>
             </div>
         </div>
-        <div class="checkmark">
-            <span v-if="selected" class="circle selected">✔</span>
-            <span v-else class="circle"></span>
-        </div>
     </div>
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
     title: String,
     price: String,
     selected: Boolean
+})
+
+const isDelivery = computed(() => {
+    // crude check: if title or price contains 'delivery', treat as delivery
+    return (props.title && props.title.toLowerCase().includes('delivery')) ||
+        (props.price && props.price.toLowerCase().includes('delivery'))
 })
 </script>
 
 <style scoped>
 .check-tile {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 12px;
     border: 2px solid var(--color-controls-inactive-stroke);
-    background: var(--color-controls-bg);
-    border-radius: 16px;
-    padding: 16px 20px;
-    min-width: 180px;
-    min-height: 80px;
+    background: var(--color-controls-bg, #fff);
+    min-width: 146px;
+    min-height: 110px;
+    box-sizing: border-box;
     transition: border-color 0.2s;
+    cursor: pointer;
+    flex: 1 0 0;
+    align-self: stretch;
+    gap: 8px;
 }
 
 .check-tile.selected {
     border-color: var(--color-controls-accent-primary);
 }
 
-.icon {
-    font-size: 24px;
-}
-
-.icon-default {
-    font-size: 24px;
-}
-
-.info {
-    flex: 1;
+.tile-top {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
 }
 
-.title {
-    /* Typography handled by .form-primary */
+.icon {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-width: 24px;
+    min-height: 24px;
 }
 
-.price {
-    /* Typography handled by .form-secondary */
+.icon-svg img {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .checkmark {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
 .circle {
@@ -88,5 +106,27 @@ defineProps({
     background: var(--color-controls-accent-primary);
     border-color: var(--color-controls-accent-primary);
     color: var(--color-controls-accent-secondary);
+}
+
+.info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: var(--color-foreground-base);
+    word-break: break-word;
+}
+
+.price {
+    font-size: 14px;
+    color: var(--color-foreground-secondary);
+    word-break: break-word;
 }
 </style>

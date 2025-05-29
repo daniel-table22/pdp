@@ -1,5 +1,5 @@
 <template>
-    <div class="check-inline">
+    <div class="check-inline" @click="$emit('click')">
         <div class="title form-secondary">
             <slot name="title">{{ title }}</slot>
         </div>
@@ -31,6 +31,7 @@ defineProps({
     gap: 12px;
     min-width: 180px;
     border-bottom: 1px solid var(--color-controls-inactive-stroke);
+    cursor: pointer;
 
     &:last-child {
         border-bottom: none;
