@@ -12,18 +12,18 @@
   --color-foreground-invert: #ffffff;
   --color-foreground-invert-alpha: rgba(255, 255, 255, 0.8);
   --color-foreground-horizontal-rule: rgba(0, 0, 0, 0.1);
-  --color-foreground-accent: #f08e80;
-  --color-foreground-accent-dark: #db7262;
+  --color-foreground-accent: #1F7C45;
+  --color-foreground-accent-dark: #1F7C45;
   --color-foreground-yellow: #ffbf00;
 
   /* Background Colors */
   --color-background-panel: #ffffff;
   --color-background-invert-panel: #000000;
   --color-background-page: #f5f5f5;
-  --color-background-accent: #f08e80;
+  --color-background-accent: #1F7C45;
 
   /* Controls Colors */
-  --color-controls-accent-primary: #f08e80;
+  --color-controls-accent-primary: #1F7C45;
   --color-controls-accent-secondary: #ffffff;
   --color-controls-accent-text: #141414;
   --color-controls-inactive-stroke: #dddddd;

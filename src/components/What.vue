@@ -26,10 +26,16 @@
                             alt="Edit" width="20" height="20" /></div>
                     <!-- <div class="chevron readmore"><img src="../assets/images/skillet.svg" alt="Edit" width="20"
                             height="20" /></div> -->
-                    <div class="readmore">
+                    <div class="readmore" @click="openMenuLightbox">
                         View menu
                     </div>
                 </div>
+            </div>
+        </div>
+        <div v-if="showMenuLightbox" class="menu-lightbox-overlay" @click.self="closeMenuLightbox">
+            <div class="menu-lightbox">
+                <button class="close-btn" @click="closeMenuLightbox">Close</button>
+                <img src="../assets/images/menu.jpg" alt="Menu" class="menu-image" />
             </div>
         </div>
         <div class="bottom">
@@ -46,9 +52,9 @@
                     Member perks
                 </Subheader>
                 <div class="perks">
-                    <p v-for="perk in currentPerks" :key="perk.id" class="perk body">
+                    <div v-for="perk in currentPerks" :key="perk.id" class="perk body">
                         {{ perk.title }}
-                    </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -69,6 +75,10 @@ const currentMenus = computed(() => businessStore.currentMenus)
 const currentMenuIndex = ref(0)
 const isSliding = ref(false)
 const slideDirection = ref('')
+
+const showMenuLightbox = ref(false)
+function openMenuLightbox() { showMenuLightbox.value = true }
+function closeMenuLightbox() { showMenuLightbox.value = false }
 
 const fallbackTitle = '-- A multi course meal --'
 const fallbackDescription = '-- A rotating multi-course tasting menu featuring signature dishes and seasonal specials --'
@@ -348,6 +358,7 @@ function prevMenu() {
     color: var(--color-foreground-base-alpha);
     font-size: 16px;
     line-height: 24px;
+    padding-bottom: 12px;
 }
 
 .readmore {
@@ -357,5 +368,56 @@ function prevMenu() {
     font-weight: 500;
     cursor: pointer;
     padding-right: 16px;
+    transition: text-decoration 0.2s;
+}
+
+.readmore:hover {
+    text-decoration: underline;
+}
+
+.menu-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.menu-lightbox {
+    position: relative;
+    margin-top: 72px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-image {
+    width: 754px;
+    height: 1438px;
+    display: block;
+    border-radius: 8px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 1;
 }
 </style>
