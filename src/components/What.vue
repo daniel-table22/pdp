@@ -37,9 +37,9 @@
                 <Subheader class="subheader">
                     {{ currentBusiness?.whatYouGetTitle || fallbackTitle }}
                 </Subheader>
-                <p class="description body">
+                <div class="description body">
                     {{ currentBusiness?.whatYouGetDescription || fallbackDescription }}
-                </p>
+                </div>
             </div>
             <div class="bottom-right">
                 <Subheader class="subheader">
@@ -345,8 +345,9 @@ function prevMenu() {
 }
 
 .perk {
-    margin: 0;
-    padding: 4px 0;
+    color: var(--color-foreground-base-alpha);
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .readmore {
