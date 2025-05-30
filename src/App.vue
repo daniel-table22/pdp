@@ -1,11 +1,6 @@
 <template>
   <div class="app">
-    <div class="business-selector">
-      <router-link v-for="business in businessStore.businesses" :key="business.id" :to="`/business/${business.id}`"
-        class="business-link" :class="{ active: businessStore.currentBusiness?.id === business.id }">
-        {{ business.heroRestaurantName }}
-      </router-link>
-    </div>
+
     <Hero />
     <div class="bottom">
       <div class="left">
@@ -17,6 +12,12 @@
       <Membership />
     </div>
 
+    <div class="business-selector">
+      <router-link v-for="business in businessStore.businesses" :key="business.id" :to="`/business/${business.id}`"
+        class="business-link" :class="{ active: businessStore.currentBusiness?.id === business.id }">
+        {{ business.heroRestaurantName }}
+      </router-link>
+    </div>
 
   </div>
 </template>
@@ -76,7 +77,14 @@ watch(
 <style scoped>
 .app {
   margin: 0 auto;
+  background-color: var(--color-background-page);
 }
+
+#app {
+  background-color: var(--color-background-page);
+}
+
+body {}
 
 .business-selector {
   display: flex;
@@ -111,6 +119,8 @@ watch(
   color: white;
   border-color: var(--color-brand-green);
 }
+
+
 
 .app {
   min-height: 100vh;

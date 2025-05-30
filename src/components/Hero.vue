@@ -19,7 +19,8 @@
                     <span class="icon-solid-star">★</span>
                 </div>
                 <p class="average">
-                    {{ reviewText }}
+                    <!-- {{ reviewText }} -->
+                    4.7 • based on 83 reviews
                 </p>
             </div>
         </div>

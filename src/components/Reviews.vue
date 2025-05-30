@@ -46,21 +46,32 @@ const reviews = computed(() => businessStore.currentReviews)
 
 .left {
     width: 240px;
+    min-width: 240px;
+    max-width: 326px;
 }
 
 .right {
-    padding-top: 48px;
+    flex: 1;
+    min-width: 0;
+    padding-top: 42px;
 }
 
 .review-item {
     margin-bottom: 16px;
 }
 
+.review-meta {
+    font-weight: bold;
+    padding-bottom: 8px;
+}
 
+.review-text {
+    margin-bottom: 8px;
+}
 
 .review-stars {
     color: #FFC700;
-    font-size: 16[px];
+    font-size: 16px;
     margin-bottom: 8px;
 }
 
