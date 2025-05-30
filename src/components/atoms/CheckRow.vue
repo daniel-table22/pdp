@@ -30,7 +30,7 @@ defineProps({
 <style scoped>
 .check-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     border: 2px solid var(--color-controls-inactive-stroke);
     background: var(--color-controls-bg);
     border-radius: 12px;
@@ -56,17 +56,21 @@ defineProps({
 }
 
 .description {
-    /* Typography handled by .form-secondary */
+    font-size: 14px;
+    color: var(--color-foreground-secondary);
+    word-break: break-word;
 }
 
 .price {
     margin-right: 12px;
     /* Typography handled by .form-primary */
+    align-self: flex-start;
 }
 
 .checkmark {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    align-self: flex-start;
 }
 
 .circle {

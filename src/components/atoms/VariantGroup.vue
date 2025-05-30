@@ -69,7 +69,9 @@ const borderClass = computed(() =>
 }
 
 .description {
-    /* Typography handled by .form-secondary */
+    font-size: 14px;
+    color: var(--color-foreground-secondary);
+    word-break: break-word;
 }
 
 .image {
