@@ -17,7 +17,7 @@ h2 {
 h3 {
   font-family: var(--font-family-base);
   font-size: 21px;
-  font-weight: 900;
+  font-weight: 600;
   line-height: 28px;
   margin: 0;
 }
@@ -36,14 +36,14 @@ h4 {
 }
 
 .bold {
-  font-weight: 900;
+  font-weight: 600;
 }
 
 /* Form text styles */
 .form-primary {
   font-family: var(--font-family-base);
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 600;
   line-height: 19.2px;
 }
 

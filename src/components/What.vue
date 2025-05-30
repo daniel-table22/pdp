@@ -1,14 +1,47 @@
 <template>
     <div class="what-you-get">
-        <div class="left">
-            <Header class="header">What you get</Header>
-            <div class="content">
+        <div class="top">
+
+            <div class="carousel">
+                <div class="carousel-track" :class="slideDirection" :key="currentMenuIndex">
+                    <div v-for="(card, idx) in visibleCards" :key="idx" class="carousel-card">
+                        <div class="carousel-image" :style="{ backgroundImage: `url(${card.image})` }"></div>
+                        <div class="caption">
+                            <div class="date">{{ card.title }}</div>
+                            <div class="caption-title">
+                                {{ card.caption }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-content">
+                <div class="top-header-row">
+                    <Header class="header">What you get</Header>
+                </div>
+                <div class="controls">
+                    <div class="chevron chevron-left" @click="prevMenu"><img src="../assets/images/chevronleft.svg"
+                            alt="Edit" width="20" height="20" /></div>
+                    <div class="chevron chevron-right" @click="nextMenu"><img src="../assets/images/chevronright.svg"
+                            alt="Edit" width="20" height="20" /></div>
+                    <!-- <div class="chevron readmore"><img src="../assets/images/skillet.svg" alt="Edit" width="20"
+                            height="20" /></div> -->
+                    <div class="readmore">
+                        View menu
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="bottom-left">
                 <Subheader class="subheader">
                     {{ currentBusiness?.whatYouGetTitle || fallbackTitle }}
                 </Subheader>
                 <p class="description body">
                     {{ currentBusiness?.whatYouGetDescription || fallbackDescription }}
                 </p>
+            </div>
+            <div class="bottom-right">
                 <Subheader class="subheader">
                     Member perks
                 </Subheader>
@@ -17,26 +50,6 @@
                         {{ perk.title }}
                     </p>
                 </div>
-                <!-- <pre>currentBusiness: {{ currentBusiness }}</pre>
-                <pre>currentBusiness.menus: {{ currentBusiness?.menus }}</pre>
-                <pre>currentMenus: {{ currentMenus }}</pre> -->
-            </div>
-        </div>
-        <div class="carousel">
-            <div class="carousel-track" :class="slideDirection" :key="currentMenuIndex">
-                <div v-for="(card, idx) in visibleCards" :key="idx" class="carousel-card">
-                    <div class="carousel-image" :style="{ backgroundImage: `url(${card.image})` }"></div>
-                    <div class="caption">
-                        <div class="date">{{ card.title }}</div>
-                        <p class="caption-title">
-                            {{ card.caption }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="controls">
-                <div class="chevron chevron-left" @click="prevMenu">‹</div>
-                <div class="chevron chevron-right" @click="nextMenu">›</div>
             </div>
         </div>
     </div>
@@ -131,83 +144,143 @@ function nextMenu() {
 function prevMenu() {
     slideTo(prevMenuIndex.value, 'slide-right')
 }
-
-let interval = null
-onMounted(() => {
-    interval = setInterval(() => {
-        nextMenu()
-    }, 5000)
-})
-onUnmounted(() => {
-    if (interval) clearInterval(interval)
-})
 </script>
 
 <style scoped>
 .what-you-get {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background: var(--color-background-panel);
+    flex-direction: column;
     border-radius: 12px;
     overflow: hidden;
-    height: 394px;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    background-color: #000000;
+}
+
+.carousel-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 0;
+    color: #fff;
+    height: 352px;
+    position: relative;
+    z-index: 1;
+}
+
+.top-header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
 }
 
 .header {
+    color: #fff;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
     width: 100%;
-    background: transparent;
+    justify-content: flex-start;
+}
+
+.chevron {
+    background: #000;
+    color: #fff;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.chevron img {
+    filter: brightness(0) invert(1);
+    width: 20px;
+    height: 20px;
+}
+
+.carousel {
+    width: 626px;
+    height: 354px;
+    position: relative;
+    background: var(--color-background-base);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    width: 100%;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.bottom-left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.bottom-right {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 0;
 }
 
 .subheader {
     width: 100%;
 }
 
-.left {
+.content {
     display: flex;
+    padding-bottom: 16px;
     flex-direction: column;
-    gap: 24px;
-    width: 394px;
-    height: 100%;
-    padding: 0px 24px;
-    justify-content: space-between;
     align-items: flex-start;
-
-    .content {
-        display: flex;
-        padding-bottom: 16px;
-        flex-direction: column;
-        align-items: flex-start;
-        flex: 1 0 0;
-        align-self: stretch;
-
-        .description {
-            color: var(--color-foreground-base-alpha);
-            font-size: 16px;
-            line-height: 24px;
-        }
-
-        .perks {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            align-self: stretch;
-
-            .perk {}
-        }
-    }
+    flex: 1 0 0;
+    align-self: stretch;
 }
 
-.carousel {
-    width: 200px;
-    position: relative;
-    flex: 1;
-    background: var(--color-background-invert-panel);
-    overflow: hidden;
+.description {
+    color: var(--color-foreground-base-alpha);
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.perks {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 100%;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .carousel-track {
@@ -219,6 +292,7 @@ onUnmounted(() => {
     left: 0;
     transition: transform 0.5s cubic-bezier(.55, 0, .1, 1);
     will-change: transform;
+    z-index: 0;
 }
 
 .carousel-track.slide-left {
@@ -231,7 +305,7 @@ onUnmounted(() => {
 
 .carousel-card {
     width: 100%;
-    height: 70%;
+    height: 100%;
     display: flex;
     justify-content: center;
     flex-shrink: 0;
@@ -251,7 +325,6 @@ onUnmounted(() => {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 30%;
     background: rgba(27, 27, 27, 0.4);
     color: #fff;
     padding: 12px 16px;
@@ -271,32 +344,17 @@ onUnmounted(() => {
     line-height: 24px;
 }
 
-.controls {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 16px;
-    transform: translateY(-50%);
-}
-
-.chevron {
-    background: var(--color-foreground-invert);
-    border-radius: 100px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    user-select: none;
-}
-
 .perk {
     margin: 0;
     padding: 4px 0;
+}
+
+.readmore {
+    flex: 1;
+    text-align: right;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    padding-right: 16px;
 }
 </style>

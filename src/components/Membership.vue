@@ -3,8 +3,8 @@
         <Header class="header">Your membership</Header>
         <div v-if="business">
             <div class="membership-summary">
-                <span class="form-primary">from ${{ business.membershipPrice }} per month</span>
-                <span class="form-primary">&bull; delivery {{ business.membershipDate }}</span>
+                From ${{ business.membershipPrice }} per month
+                &bull; delivery {{ business.membershipDate }}
             </div>
             <div class="inputs">
                 <div class="offering-types">
@@ -78,7 +78,7 @@ function handleVariantSelect(groupId, idx) {
     width: 400px;
     min-height: 700px;
     background-color: var(--color-background-panel);
-    padding: 24px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -91,8 +91,8 @@ function handleVariantSelect(groupId, idx) {
 
 .membership-summary {
     display: flex;
-    gap: 8px;
     margin-bottom: 8px;
+    padding-left: 8px;
 }
 
 .inputs {
