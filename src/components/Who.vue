@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="right">
-      <img v-if="supportingMediaUrl" :src="supportingMediaUrl" :alt="supportingMedia?.alternativeText || 'Who'" />
+      <img :src="supportingMediaUrl || defaultImage" :alt="supportingMedia?.alternativeText || 'Who'" />
     </div>
   </div>
 </template>
@@ -22,14 +22,15 @@ import { computed } from 'vue'
 import { useBusinessStore } from '../stores/business'
 import { getStrapiMedia } from '../utils/strapi'
 import Header from './atoms/Header.vue'
+import defaultImage from '../assets/images/who.jpg'
 
 const businessStore = useBusinessStore()
 const currentBusiness = computed(() => businessStore.currentBusiness)
-const supportingMedia = computed(() => currentBusiness.value?.supportingMedia?.[0] || null)
-const supportingMediaUrl = computed(() => supportingMedia.value ? getStrapiMedia(supportingMedia.value.url) : null)
+const supportingMedia = computed(() => currentBusiness.value?.supportingMedia)
+const supportingMediaUrl = computed(() => supportingMedia.value ? getStrapiMedia(supportingMedia.value) : null)
 
-const fallbackDescription = "-- We're a group of friends who love to cook and eat. We're not chefs, but we're good at it. --"
-const fallbackChefName = '-- Chef name --'
+const fallbackDescription = '-- Placeholder --'
+const fallbackChefName = '-- Placeholder --'
 </script>
 
 <style scoped>

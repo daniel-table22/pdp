@@ -2,32 +2,30 @@
     <div class="what-you-get">
         <div class="top">
 
-            <div class="carousel">
-                <div class="carousel-track" :class="slideDirection" :key="currentMenuIndex">
-                    <div v-for="(card, idx) in visibleCards" :key="idx" class="carousel-card">
-                        <div class="carousel-image" :style="{ backgroundImage: `url(${card.image})` }"></div>
-                        <div class="caption">
-                            <div class="date">{{ card.title }}</div>
-                            <div class="caption-title">
-                                {{ card.caption }}
-                            </div>
+
+            <div class="top-left">
+                <Header class="header">Sample menus</Header>
+                <div class="spacer"></div>
+                <div class="bottom-section">
+                    <div class="caption body">
+                        {{ visibleCards[0]?.caption || 'Description' }}
+                    </div>
+                    <div class="controls">
+                        <div class="readmore" @click="openMenuLightbox">
+                            View menu
                         </div>
+                        <div class="chevron chevron-left" @click="prevMenu"><img
+                                src="../assets/images/chevronleft.svg" /></div>
+                        <div class="chevron chevron-right" @click="nextMenu"><img
+                                src="../assets/images/chevronright.svg" /></div>
+
                     </div>
                 </div>
             </div>
-            <div class="carousel-content">
-                <div class="top-header-row">
-                    <Header class="header">What you get</Header>
-                </div>
-                <div class="controls">
-                    <div class="chevron chevron-left" @click="prevMenu"><img src="../assets/images/chevronleft.svg"
-                            alt="Edit" width="20" height="20" /></div>
-                    <div class="chevron chevron-right" @click="nextMenu"><img src="../assets/images/chevronright.svg"
-                            alt="Edit" width="20" height="20" /></div>
-                    <!-- <div class="chevron readmore"><img src="../assets/images/skillet.svg" alt="Edit" width="20"
-                            height="20" /></div> -->
-                    <div class="readmore" @click="openMenuLightbox">
-                        View menu
+            <div class="top-right">
+                <div class="carousel-track" :class="slideDirection" :key="currentMenuIndex">
+                    <div v-for="(card, idx) in visibleCards" :key="idx" class="carousel-card">
+                        <div class="carousel-image" :style="{ backgroundImage: `url(${card.image})` }"></div>
                     </div>
                 </div>
             </div>
@@ -41,18 +39,20 @@
         <div class="bottom">
             <div class="bottom-left">
                 <Subheader class="subheader">
-                    {{ currentBusiness?.whatYouGetTitle || fallbackTitle }}
+                    And member-only perks
                 </Subheader>
-                <div class="description body">
+                <!-- <div class="description body">
                     {{ currentBusiness?.whatYouGetDescription || fallbackDescription }}
-                </div>
+                </div> -->
             </div>
             <div class="bottom-right">
-                <Subheader class="subheader">
+                <!-- <Subheader class="subheader">
                     Member perks
-                </Subheader>
+                </Subheader> -->
                 <div class="perks">
+
                     <div v-for="perk in currentPerks" :key="perk.id" class="perk body">
+                        <img src="../assets/images/chevronleft.svg" alt="Edit" />
                         {{ perk.title }}
                     </div>
                 </div>
@@ -80,9 +80,9 @@ const showMenuLightbox = ref(false)
 function openMenuLightbox() { showMenuLightbox.value = true }
 function closeMenuLightbox() { showMenuLightbox.value = false }
 
-const fallbackTitle = '-- A multi course meal --'
-const fallbackDescription = '-- A rotating multi-course tasting menu featuring signature dishes and seasonal specials --'
-const fallbackMenuItem = '-- Crispy daikon cakes with chili sauce, pickled lotus root salad, and shiso rice. --'
+const fallbackTitle = '-- Placeholder title--'
+const fallbackDescription = '-- PLaceholder subheading--'
+const fallbackMenuItem = '-- Placeholder caption--'
 
 function getMenuItemText(menu) {
     if (!menu || !Array.isArray(menu.description) || menu.description.length === 0) return fallbackMenuItem;
@@ -170,12 +170,11 @@ function prevMenu() {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 10px;
     width: 100%;
     background-color: #000000;
 }
 
-.carousel-content {
+.top-left {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -186,13 +185,7 @@ function prevMenu() {
     height: 352px;
     position: relative;
     z-index: 1;
-}
-
-.top-header-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
+    padding: 12px 16px 16px;
 }
 
 .header {
@@ -210,27 +203,19 @@ function prevMenu() {
 }
 
 .chevron {
-    background: #000;
-    color: #fff;
-    border-radius: 100px;
-    width: 40px;
-    height: 40px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
     cursor: pointer;
-    user-select: none;
+
+
+    img {
+        filter: brightness(0) invert(1);
+        width: 24px;
+        height: 24px;
+    }
 }
 
-.chevron img {
-    filter: brightness(0) invert(1);
-    width: 20px;
-    height: 20px;
-}
-
-.carousel {
-    width: 626px;
+.top-right {
+    width: 532px;
     height: 354px;
     position: relative;
     background: var(--color-background-base);
@@ -250,7 +235,7 @@ function prevMenu() {
 }
 
 .bottom-left {
-    flex: 2;
+    flex: 6;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -259,7 +244,7 @@ function prevMenu() {
 }
 
 .bottom-right {
-    flex: 2;
+    flex: 16;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -330,19 +315,6 @@ function prevMenu() {
     height: 100%;
 }
 
-.caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(27, 27, 27, 0.4);
-    color: #fff;
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
 .date {
     font-size: 14px;
     opacity: 0.6;
@@ -355,6 +327,10 @@ function prevMenu() {
 }
 
 .perk {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     color: var(--color-foreground-base-alpha);
     font-size: 16px;
     line-height: 24px;
@@ -363,12 +339,16 @@ function prevMenu() {
 
 .readmore {
     flex: 1;
-    text-align: right;
-    color: #fff;
-    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+
     cursor: pointer;
     padding-right: 16px;
-    transition: text-decoration 0.2s;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .readmore:hover {
@@ -419,5 +399,22 @@ function prevMenu() {
     font-size: 1rem;
     cursor: pointer;
     z-index: 1;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.bottom-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.caption {
+    color: var(--color-foreground-invert-alpha);
+    font-size: 16px;
+    line-height: 24px;
 }
 </style>
