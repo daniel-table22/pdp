@@ -38,7 +38,7 @@
         <div class="bottom">
             <div class="bottom-left">
                 <Subheader class="subheader">
-                    And member-only perks
+                    {{ currentBusiness?.wygsub || '-- placeholder --' }}
                 </Subheader>
                 <div class="description body">
                     {{ visibleCards[0]?.caption || '-- Placeholder perk --' }}
