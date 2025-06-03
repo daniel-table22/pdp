@@ -12,7 +12,7 @@
                             View menu
                         </div>
                         <div class="readmore" v-else>
-                            Vibe menu
+                            Vibey menu
                         </div>
                         <div class="chevron chevron-left" @click="prevMenu"><img
                                 src="../assets/images/chevronleft.svg" /></div>
