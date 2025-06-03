@@ -1,5 +1,11 @@
 <template>
   <div class="app">
+    <div class="business-selector">
+      <router-link v-for="business in businessStore.businesses" :key="business.id" :to="`/business/${business.id}`"
+        class="business-link" :class="{ active: businessStore.currentBusiness?.id === business.id }">
+        {{ business.heroRestaurantName }}
+      </router-link>
+    </div>
 
     <Hero />
     <div class="bottom">
@@ -12,12 +18,6 @@
       <Membership />
     </div>
 
-    <div class="business-selector">
-      <router-link v-for="business in businessStore.businesses" :key="business.id" :to="`/business/${business.id}`"
-        class="business-link" :class="{ active: businessStore.currentBusiness?.id === business.id }">
-        {{ business.heroRestaurantName }}
-      </router-link>
-    </div>
 
   </div>
 </template>
@@ -98,14 +98,17 @@ body {}
 
 .business-link {
   margin: 0;
-  padding: 8px 16px;
+
+  padding: 4px 8px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background-color: var(--color-background-page);
   color: var(--color-text);
   cursor: pointer;
   transition: all 0.2s ease;
+  font-size: 12px;
   white-space: nowrap;
+  font-weight: 600;
   text-decoration: none;
   display: inline-block;
 }

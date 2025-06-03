@@ -4,21 +4,20 @@
 
 
             <div class="top-left">
-                <Header class="header">Sample menus</Header>
+                <Header class="header">{{ currentBusiness?.whatYouGetTitle || 'What you get..' }}</Header>
                 <div class="spacer"></div>
                 <div class="bottom-section">
-                    <div class="caption body">
-                        {{ visibleCards[0]?.caption || 'Description' }}
-                    </div>
                     <div class="controls">
-                        <div class="readmore" @click="openMenuLightbox">
+                        <div class="readmore" v-if="visibleCards[0]?.menuupload" @click="openMenuLightbox">
                             View menu
+                        </div>
+                        <div class="readmore" v-else>
+                            Vibe menu
                         </div>
                         <div class="chevron chevron-left" @click="prevMenu"><img
                                 src="../assets/images/chevronleft.svg" /></div>
                         <div class="chevron chevron-right" @click="nextMenu"><img
                                 src="../assets/images/chevronright.svg" /></div>
-
                     </div>
                 </div>
             </div>
@@ -41,16 +40,12 @@
                 <Subheader class="subheader">
                     And member-only perks
                 </Subheader>
-                <!-- <div class="description body">
-                    {{ currentBusiness?.whatYouGetDescription || fallbackDescription }}
-                </div> -->
+                <div class="description body">
+                    {{ visibleCards[0]?.caption || '-- Placeholder perk --' }}
+                </div>
             </div>
             <div class="bottom-right">
-                <!-- <Subheader class="subheader">
-                    Member perks
-                </Subheader> -->
                 <div class="perks">
-
                     <div v-for="perk in currentPerks" :key="perk.id" class="perk body">
                         <img src="../assets/images/chevronleft.svg" alt="Edit" />
                         {{ perk.title }}
@@ -125,7 +120,8 @@ const visibleCards = computed(() => {
         return {
             image: getMenuImageUrl(menu),
             title: menu.title || '',
-            caption: getMenuItemText(menu)
+            caption: getMenuItemText(menu),
+            menuupload: menu.menuupload || null
         }
     }
     if (slideDirection.value === 'slide-left') {

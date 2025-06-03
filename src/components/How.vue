@@ -4,7 +4,7 @@
         <img class="diagram" src="@/assets/images/steps.svg" alt="How it works" />
         <div class="allergies body">
             <hr>
-            Allergies or travel plans? We’re flexible, cancel anytime
+            Travel plans? We’re flexible, skip or cancel anytime
         </div>
     </div>
 </template>
