@@ -45,6 +45,9 @@
                 </div>
             </div>
             <div class="bottom-right">
+                <Subheader class="subheader">
+                    And member-only perks
+                </Subheader>
                 <div class="perks">
                     <div v-for="perk in currentPerks" :key="perk.id" class="perk body">
                         <img src="../assets/images/chevronleft.svg" alt="Edit" />
@@ -231,7 +234,7 @@ function prevMenu() {
 }
 
 .bottom-left {
-    flex: 6;
+    flex: 8;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -240,7 +243,7 @@ function prevMenu() {
 }
 
 .bottom-right {
-    flex: 16;
+    flex: 8;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
