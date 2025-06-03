@@ -1,6 +1,6 @@
 
 # Trouble shooting
-Locally:
+Locally: 
 When the front jsut says upgrade required it means you have multiple termina instances running the same server, jsut quit all of them then start a new one. 
  n the cloud, make sure that on vercel you are running on the prod version not one of the deployments
 
