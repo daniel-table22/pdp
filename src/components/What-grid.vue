@@ -1,31 +1,40 @@
 <template>
     <div class="what-you-get">
-        <!-- Row 1: Header -->
-        <div class="header-row">
-            <Header class="header">{{ currentBusiness?.whatYouGetTitle || 'What you get..' }}</Header>
-        </div>
+        <div class="top">
 
-        <!-- Row 2: Carousel -->
-        <div class="carousel-row">
-            <div class="carousel-container">
+
+            <div class="top-left">
+                <Header class="header">{{ currentBusiness?.whatYouGetTitle || 'What you get..' }}</Header>
+                <div class="spacer"></div>
+                <div class="bottom-section">
+                    <div class="controls">
+                        <div class="readmore" v-if="visibleCards[0]?.menuupload" @click="openMenuLightbox">
+                            View menu
+                        </div>
+                        <div class="readmore" v-else>
+                            Vibey menu
+                        </div>
+                        <div class="chevron chevron-left" @click="prevMenu"><img
+                                src="../assets/images/chevronleft.svg" /></div>
+                        <div class="chevron chevron-right" @click="nextMenu"><img
+                                src="../assets/images/chevronright.svg" /></div>
+                    </div>
+                </div>
+            </div>
+            <div class="top-right">
                 <div class="carousel-track" :class="slideDirection" :key="currentMenuIndex">
                     <div v-for="(card, idx) in visibleCards" :key="idx" class="carousel-card">
                         <div class="carousel-image" :style="{ backgroundImage: `url(${card.image})` }"></div>
                     </div>
                 </div>
-                <!-- Floating Controls -->
-                <div class="controls">
-                    <div class="chevron chevron-left" @click="prevMenu">
-                        <img src="../assets/images/chevronleft.svg" />
-                    </div>
-                    <div class="chevron chevron-right" @click="nextMenu">
-                        <img src="../assets/images/chevronright.svg" />
-                    </div>
-                </div>
             </div>
         </div>
-
-        <!-- Row 3: Bottom Section -->
+        <div v-if="showMenuLightbox" class="menu-lightbox-overlay" @click.self="closeMenuLightbox">
+            <div class="menu-lightbox">
+                <button class="close-btn" @click="closeMenuLightbox">Close</button>
+                <img src="../assets/images/menu.jpg" alt="Menu" class="menu-image" />
+            </div>
+        </div>
         <div class="bottom">
             <div class="bottom-left">
                 <Subheader class="subheader">
@@ -45,14 +54,6 @@
                         {{ perk.title }}
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Menu Lightbox -->
-        <div v-if="showMenuLightbox" class="menu-lightbox-overlay" @click.self="closeMenuLightbox">
-            <div class="menu-lightbox">
-                <button class="close-btn" @click="closeMenuLightbox">Close</button>
-                <img src="../assets/images/menu.jpg" alt="Menu" class="menu-image" />
             </div>
         </div>
     </div>
@@ -161,40 +162,119 @@ function prevMenu() {
     border-radius: 12px;
     overflow: hidden;
     width: 100%;
+    background-color: #ffffff;
 }
 
-.header-row {
-    padding: 24px 32px;
-    color: var(--color-foreground-base);
-}
-
-.carousel-row {
+.top {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
     width: 100%;
-    position: relative;
+    background-color: #000000;
 }
 
-.carousel-container {
-    width: 100%;
-    aspect-ratio: 1.5/1;
+.top-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 0;
+    color: #fff;
+    height: 352px;
     position: relative;
-    background: var(--color-background-base);
-    overflow: hidden;
+    z-index: 1;
+    padding: 12px 16px 16px;
+}
+
+.header {
+    color: #fff;
 }
 
 .controls {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    right: 24px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
     color: #fff;
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 12px 16px;
-    border-radius: 8px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.chevron {
+    display: flex;
+    cursor: pointer;
+
+
+    img {
+        filter: brightness(0) invert(1);
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.top-right {
+    width: 532px;
+    height: 354px;
+    position: relative;
+    background: var(--color-background-base);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    width: 100%;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.bottom-left {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.bottom-right {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 0;
+}
+
+.subheader {
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    padding-bottom: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.description {
+    color: var(--color-foreground-base-alpha);
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.perks {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
 }
 
 .carousel-track {
@@ -206,6 +286,7 @@ function prevMenu() {
     left: 0;
     transition: transform 0.5s cubic-bezier(.55, 0, .1, 1);
     will-change: transform;
+    z-index: 0;
 }
 
 .carousel-track.slide-left {
@@ -323,67 +404,16 @@ function prevMenu() {
     flex: 1;
 }
 
-.bottom {
-    display: flex;
-    flex-direction: row;
-    gap: 32px;
+.bottom-section {
     width: 100%;
-    padding: 32px;
-    box-sizing: border-box;
-}
-
-.bottom-left {
-    flex: 8;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    min-width: 0;
+    gap: 16px;
 }
 
-.bottom-right {
-    flex: 8;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    min-width: 0;
-}
-
-.subheader {
-    width: 100%;
-}
-
-.content {
-    display: flex;
-    padding-bottom: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    flex: 1 0 0;
-    align-self: stretch;
-}
-
-.description {
-    color: var(--color-foreground-base-alpha);
+.caption {
+    color: var(--color-foreground-invert-alpha);
     font-size: 16px;
     line-height: 24px;
-}
-
-.perks {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: stretch;
-}
-
-.chevron {
-    display: flex;
-    cursor: pointer;
-
-    img {
-        filter: brightness(0) invert(1);
-        width: 24px;
-        height: 24px;
-    }
 }
 </style>
