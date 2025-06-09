@@ -26,8 +26,20 @@ import defaultImage from '../assets/images/who.jpg'
 
 const businessStore = useBusinessStore()
 const currentBusiness = computed(() => businessStore.currentBusiness)
-const supportingMedia = computed(() => currentBusiness.value?.supportingMedia)
-const supportingMediaUrl = computed(() => supportingMedia.value ? getStrapiMedia(supportingMedia.value) : null)
+const supportingMedia = computed(() => {
+  console.log('Current Business:', currentBusiness.value)
+  console.log('Supporting Media:', currentBusiness.value?.supportingMedia)
+  return currentBusiness.value?.supportingMedia
+})
+const supportingMediaUrl = computed(() => {
+  const mediaArr = currentBusiness.value?.supportingMedia;
+  const mediaObj = Array.isArray(mediaArr) ? mediaArr[0] : mediaArr;
+  const url = mediaObj?.url
+    ? getStrapiMedia(mediaObj.url)
+    : null;
+  console.log('Supporting Media Image URL:', url);
+  return url;
+})
 
 const fallbackDescription = '-- Placeholder --'
 const fallbackChefName = '-- Placeholder --'

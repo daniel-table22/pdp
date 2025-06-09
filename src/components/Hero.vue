@@ -212,7 +212,7 @@ onUnmounted(() => {
 }
 
 .carousel {
-    background: url('@/assets/images/hero.jpg') center/cover no-repeat;
+    background: center/cover no-repeat;
     height: 418.67px;
     width: 100%;
     border-radius: 0 20px 20px 0;

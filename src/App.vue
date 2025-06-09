@@ -49,7 +49,8 @@ onMounted(async () => {
       }
     })
     const data = await res.json()
-    console.log('Strapi API response:', data)
+    console.log('Full Strapi API response:', data)
+    console.log('Supporting Media in response:', data.data?.[0]?.attributes?.supportingMedia)
     businessStore.setBusinesses(data.data)
     // After businesses are loaded, select the business from the route if present
     if (route.params.id) {
