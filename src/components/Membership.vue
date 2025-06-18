@@ -133,6 +133,10 @@ function handleVariantSelect(groupId, idx) {
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    .form-secondary {
+        color: var(--color-foreground-base-alpha) !important;
+    }
 }
 
 .delivery-options {

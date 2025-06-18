@@ -57,7 +57,7 @@ defineProps({
 
 .description {
     font-size: 14px;
-    color: var(--color-foreground-secondary);
+    color: var(--color-foreground-base-alpha);
     word-break: break-word;
 }
 

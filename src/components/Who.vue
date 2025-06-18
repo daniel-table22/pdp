@@ -83,8 +83,18 @@ const fallbackChefName = '-- Placeholder --'
 }
 
 .right {
+  flex: 1;
   display: flex;
-  height: 100%;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.right img {
+  height: 388px;
+  width: auto;
+  object-fit: cover;
+  object-position: center;
 }
 
 .owner {}
