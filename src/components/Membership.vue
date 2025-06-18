@@ -5,10 +5,6 @@
             <div class="membership-summary">
                 Billed now • Next edition {{ new Date(new Date().setMonth(new Date().getMonth() +
                     1)).toLocaleString('default', { month: 'long' }) }} {{ new Date().getFullYear() }}
-                <!-- From ${{ business.membershipPrice }} per month
-                &bull; delivery {{ business.membershipDate }} -->
-
-
             </div>
             <div class="inputs">
                 <div class="offering-types">
@@ -103,18 +99,23 @@ function handleVariantSelect(groupId, idx) {
     padding: 12px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    /* gap: 12px; */
     border-radius: var(--spacing-panel-radius);
 }
 
 .header {
     background: transparent;
+    padding-bottom: 0;
+    padding-left: 8px;
+    padding-top: 12px;
 }
 
 .membership-summary {
     display: flex;
     margin-bottom: 8px;
     padding-left: 8px;
+    color: var(--color-foreground-base-alpha);
+    padding-bottom: 8px;
 }
 
 .inputs {

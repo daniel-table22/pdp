@@ -2,9 +2,10 @@
     <div class="what-you-get">
         <!-- Row 1: Header -->
         <div class="header-row">
-            <Header class="header">{{ currentBusiness?.whatYouGetTitle || 'What you get..' }}</Header>
-        </div>
+            <H3 class="header">{{ currentBusiness?.whatYouGetTitle || 'What you get..' }}</H3>
 
+        </div>
+        <div class="sample body">Example selections</div>
         <!-- Row 2: Carousel -->
         <div class="carousel-row">
             <div class="carousel-container">
@@ -164,13 +165,26 @@ function prevMenu() {
 }
 
 .header-row {
-    padding: 24px 32px;
+    padding-top: 24px;
+    /* padding-left: 12px; */
+    padding-bottom: 0;
+    margin: 0;
     color: var(--color-foreground-base);
+
 }
+
+.sample {
+    color: var(--color-foreground-base-alpha) !important;
+    /* padding-left: 12px; */
+    padding-bottom: 16px;
+}
+
 
 .carousel-row {
     width: 100%;
     position: relative;
+
+
 }
 
 .carousel-container {
@@ -340,9 +354,10 @@ function prevMenu() {
 .bottom {
     display: flex;
     flex-direction: row;
-    gap: 32px;
+    gap: 24px;
     width: 100%;
-    padding: 32px;
+    /* padding: 32px 12px 32px 12px; */
+    padding: 16px 0 16px 0;
     box-sizing: border-box;
 }
 
@@ -388,5 +403,6 @@ function prevMenu() {
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
+    color: var(--color-foreground-base-alpha);
 }
 </style>
