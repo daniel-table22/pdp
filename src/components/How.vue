@@ -13,10 +13,9 @@
 import Header from './atoms/Header.vue'
 import { computed } from 'vue'
 import { useBusinessStore } from '../stores/business'
-import wineDesktop from '@/assets/images/wine_desktop.svg'
-import mealDesktop from '@/assets/images/meal_desktop.svg'
-import retailDesktop from '@/assets/images/retail_desktop.svg'
-import steps from '@/assets/images/steps.svg'
+import wineDesktop from '@/assets/images/howItWorks-beverageClub-desktop.png'
+import mealDesktop from '@/assets/images/howItWorks-mealKit-desktop.png'
+import retailDesktop from '@/assets/images/howItWorks-specialtyBox-desktop.png'
 
 const businessStore = useBusinessStore()
 const currentBusiness = computed(() => businessStore.currentBusiness)
@@ -30,7 +29,7 @@ const diagramSrc = computed(() => {
         case 'shop':
             return retailDesktop
         default:
-            return steps
+            return mealDesktop
     }
 })
 </script>
@@ -46,8 +45,9 @@ const diagramSrc = computed(() => {
 }
 
 .diagram {
-    width: 607;
+    width: 100%;
     height: auto;
+
 }
 
 .allergies {
@@ -61,7 +61,7 @@ const diagramSrc = computed(() => {
         width: 100%;
         border: 1px solid var(--Colors-border-default, #E0E0E0);
         margin-top: 16px;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
     }
 }
 </style>
