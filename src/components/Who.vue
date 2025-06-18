@@ -54,6 +54,7 @@ const fallbackChefName = '-- Placeholder --'
   border-radius: var(--Spacing-pannel-radius, 12px);
   background: var(--Colors-background-panel, #FFF);
   height: 384px;
+  overflow: hidden;
 }
 
 .content {
