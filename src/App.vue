@@ -1,24 +1,23 @@
 <template>
   <div class="app">
-    <div class="business-selector">
+    <div v-if="showBusinessSelector" class="business-selector">
       <router-link v-for="business in businessStore.businesses" :key="business.id" :to="`/business/${business.id}`"
         class="business-link" :class="{ active: businessStore.currentBusiness?.id === business.id }">
         {{ business.heroRestaurantName }}
       </router-link>
     </div>
-
-    <Hero />
-    <div class="bottom">
-      <div class="left">
-        <What />
-        <How />
-        <Who />
-        <Reviews />
+    <div class="content" :class="{ 'with-menu': showBusinessSelector }">
+      <Hero />
+      <div class="bottom">
+        <div class="left">
+          <What />
+          <How />
+          <Who />
+          <Reviews />
+        </div>
+        <Membership />
       </div>
-      <Membership />
     </div>
-
-
   </div>
 </template>
 
@@ -29,7 +28,7 @@ import How from './components/How.vue'
 import Who from './components/Who.vue'
 import Membership from './components/Membership.vue'
 import Reviews from './components/Reviews.vue'
-import { onMounted, watch } from 'vue'
+import { onMounted, watch, ref, onUnmounted } from 'vue'
 import { useBusinessStore } from './stores/business.js'
 import { STRAPI_URL, STRAPI_TOKEN } from './config'
 import { useRoute, useRouter } from 'vue-router'
@@ -40,6 +39,8 @@ const perks = businessStore.currentPerks
 const menus = businessStore.currentMenus
 const route = useRoute()
 const router = useRouter()
+const showBusinessSelector = ref(false)
+let keySequence = ''
 
 onMounted(async () => {
   try {
@@ -73,103 +74,93 @@ watch(
     }
   }
 )
+
+const handleKeyPress = (event) => {
+  keySequence += event.key.toLowerCase()
+  if (keySequence.length > 2) {
+    keySequence = keySequence.slice(-2)
+  }
+  if (keySequence === 'me') {
+    showBusinessSelector.value = !showBusinessSelector.value
+    keySequence = ''
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyPress)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyPress)
+})
 </script>
 
 <style scoped>
 .app {
-  margin: 0 auto;
-  background-color: var(--color-background-page);
-}
-
-#app {
-  background-color: var(--color-background-page);
-}
-
-body {}
-
-.business-selector {
+  min-height: 100vh;
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  max-width: 1124px;
+  margin: 0 auto;
   padding: 12px;
   background-color: var(--color-background-page);
-  border-bottom: 1px solid var(--color-border);
-  margin-bottom: 12px;
-  overflow-x: auto;
+}
+
+.business-selector {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-background-panel);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  z-index: 1000;
+  border-bottom: 1px solid var(--color-controls-inactive-stroke);
 }
 
 .business-link {
-  margin: 0;
-
-  padding: 4px 8px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background-color: var(--color-background-page);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 12px;
-  white-space: nowrap;
-  font-weight: 600;
+  color: var(--color-foreground-secondary);
   text-decoration: none;
-  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .business-link:hover {
-  background-color: var(--color-background-hover);
+  background: var(--color-controls-bg-hover);
 }
 
 .business-link.active {
-  background-color: var(--color-brand-green);
   color: white;
-  border-color: var(--color-brand-green);
+  background: var(--color-brand-green);
 }
 
+.content {
+  flex: 1;
+}
 
+.content.with-menu {
+  padding-top: 80px;
+}
 
-.app {
-  min-height: 100vh;
-  max-width: 1280px;
-  padding: 12px;
-  background-color: var(--color-background-page);
+.bottom {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.left {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-
-  .bottom {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    align-self: stretch;
-
-    .left {
-      flex: 1 1 0;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 12px;
-    }
-
-    .membership {
-      width: 400px;
-      flex-shrink: 0;
-    }
-  }
+  gap: 24px;
 }
 
-button {
-  margin: 2rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-}
-
-pre {
-  background: #f4f4f4;
-  padding: 1rem;
-  border-radius: 4px;
-  margin: 2rem;
+.membership {
+  width: 400px;
+  flex-shrink: 0;
 }
 </style>

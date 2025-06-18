@@ -3,8 +3,12 @@
         <Header class="header">Your membership</Header>
         <div v-if="business">
             <div class="membership-summary">
-                From ${{ business.membershipPrice }} per month
-                &bull; delivery {{ business.membershipDate }}
+                Billed now • Next edition {{ new Date(new Date().setMonth(new Date().getMonth() +
+                    1)).toLocaleString('default', { month: 'long' }) }} {{ new Date().getFullYear() }}
+                <!-- From ${{ business.membershipPrice }} per month
+                &bull; delivery {{ business.membershipDate }} -->
+
+
             </div>
             <div class="inputs">
                 <div class="offering-types">
@@ -24,21 +28,38 @@
                     </VariantGroup>
                 </div>
 
-                <EditRow style="width: 100%;">
+                <!-- <EditRow style="width: 100%;">
                     <template #label>Dietary restrictions</template>
-                    <template #value>Edit</template>
-                </EditRow>
+<template #value>Edit</template>
+</EditRow> -->
 
                 <div class="delivery-options">
                     <CheckTile v-for="(option, idx) in business.delivery || []" :key="option.id" :title="option.type"
                         :price="option.description" :selected="idx === selectedDeliveryIdx"
                         @click="selectedDeliveryIdx = idx" />
                 </div>
+                <div class="map-cta" @click="showMapModal = true">
+                    <img src="../assets/images/map.svg" alt="Edit" width="20" height="20" /> View delivery locations
+                </div>
 
                 <ButtonPrimary>Become a member</ButtonPrimary>
-                <ButtonSecondary>Or gift membership</ButtonSecondary>
+                <!-- <ButtonSecondary>Or gift membership</ButtonSecondary> -->
 
-                <ButtonTertiary>FAQ</ButtonTertiary>
+                <!-- <ButtonTertiary>FAQ----</ButtonTertiary> -->
+                <AccordionRow>
+                    <template #label>FAQ</template>
+
+                </AccordionRow>
+
+
+
+            </div>
+        </div>
+
+        <!-- Map Modal -->
+        <div v-if="showMapModal" class="map-modal-overlay" @click="showMapModal = false">
+            <div class="map-modal" @click.stop>
+                <img src="../assets/images/map.png" alt="Delivery Locations Map" class="map-image" />
             </div>
         </div>
     </div>
@@ -52,7 +73,7 @@ import CheckRow from './atoms/CheckRow.vue'
 import VariantGroup from './atoms/VariantGroup.vue'
 import EditRow from './atoms/EditRow.vue'
 import ButtonPrimary from './atoms/ButtonPrimary.vue'
-import ButtonSecondary from './atoms/ButtonSecondary.vue'
+import AccordionRow from './atoms/AccordionRow.vue'
 import ButtonTertiary from './atoms/ButtonTertiary.vue'
 import FormTitle from './atoms/FormTitle.vue'
 import { useBusinessStore } from '../stores/business'
@@ -62,6 +83,7 @@ import { getStrapiMedia } from '../utils/strapi'
 const businessStore = useBusinessStore()
 const business = computed(() => businessStore.currentBusiness)
 const selectedDeliveryIdx = ref(1) // Demo: select the second option (Pick-up)
+const showMapModal = ref(false)
 
 // Track selected index for each variant group
 const selectedVariantIndexes = ref({})
@@ -168,5 +190,48 @@ function handleVariantSelect(groupId, idx) {
 
 .edit-btn svg {
     display: block;
+}
+
+.map-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.map-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.map-modal {
+    width: 500px;
+    height: 500px;
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 </style>

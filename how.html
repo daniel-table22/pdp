@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Scale Demo</title>
+    <style>
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+        .image-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .scale-label {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <div class="image-wrapper">
+            <span class="scale-label">100% Scale</span>
+            <img src="how.png" alt="Image at 100% scale" style="width: 100%;">
+        </div>
+        
+        <div class="image-wrapper">
+            <span class="scale-label">50% Scale</span>
+            <img src="how.png" alt="Image at 50% scale" style="width: 50%;">
+        </div>
+        
+        <div class="image-wrapper">
+            <span class="scale-label">33% Scale</span>
+            <img src="how.png" alt="Image at 33% scale" style="width: 33%;">
+        </div>
+    </div>
+</body>
+</html>

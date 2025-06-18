@@ -41,7 +41,7 @@
                 </Subheader>
                 <div class="perks">
                     <div v-for="perk in currentPerks" :key="perk.id" class="perk body">
-                        <img src="../assets/images/chevronleft.svg" alt="Edit" />
+                        <img src="../assets/images/star.svg" alt="Edit" />
                         {{ perk.title }}
                     </div>
                 </div>
@@ -159,7 +159,7 @@ function prevMenu() {
     display: flex;
     flex-direction: column;
     border-radius: 12px;
-    overflow: hidden;
+
     width: 100%;
 }
 
@@ -175,26 +175,38 @@ function prevMenu() {
 
 .carousel-container {
     width: 100%;
-    aspect-ratio: 1.5/1;
+    aspect-ratio: 1.5/.8;
     position: relative;
     background: var(--color-background-base);
     overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.12);
 }
 
 .controls {
     position: absolute;
-    bottom: 24px;
-    left: 24px;
-    right: 24px;
-    display: flex;
+    bottom: 0;
+    right: 0;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
-    gap: 8px;
-    color: #fff;
+    gap: 12px;
     z-index: 2;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 12px 16px;
-    border-radius: 8px;
+    padding: 8px;
+    border-radius: 8px 0px 8px 0px;
+    width: fit-content;
+    background-color: black;
+
+    .chevron {
+        display: flex;
+        cursor: pointer;
+
+        img {
+            filter: brightness(1) invert(1);
+            width: 24px;
+            height: 24px;
+        }
+    }
 }
 
 .carousel-track {
@@ -246,13 +258,15 @@ function prevMenu() {
 
 .perk {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     gap: 8px;
-    color: var(--color-foreground-base-alpha);
-    font-size: 16px;
-    line-height: 24px;
-    padding-bottom: 12px;
+    padding-bottom: 8px;
+}
+
+.perk img {
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
 }
 
 .readmore {
@@ -374,16 +388,5 @@ function prevMenu() {
     flex-direction: column;
     align-items: flex-start;
     align-self: stretch;
-}
-
-.chevron {
-    display: flex;
-    cursor: pointer;
-
-    img {
-        filter: brightness(0) invert(1);
-        width: 24px;
-        height: 24px;
-    }
 }
 </style>

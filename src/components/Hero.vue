@@ -31,13 +31,21 @@
                         :style="{ backgroundImage: `url(${img})` }"></div>
                 </div>
                 <div class="controls">
+                    <div class="chevron chevron-left" @click="prevCarousel">
+                        <img src="../assets/images/chevronleft.svg" />
+                    </div>
+                    <div class="chevron chevron-right" @click="nextCarousel">
+                        <img src="../assets/images/chevronright.svg" />
+                    </div>
+                </div>
+                <!-- <div class="controls">
                     <div class="icon-outline-chevron-wrapper" @click="prevCarousel">
                         <span class="icon-outline-chevron">‹</span>
                     </div>
                     <div class="chevron-down-wrapper" @click="nextCarousel">
                         <span class="chevron-down">›</span>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -248,7 +256,7 @@ onUnmounted(() => {
     flex-shrink: 0;
 }
 
-.controls {
+/* .controls {
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -257,6 +265,32 @@ onUnmounted(() => {
     width: 100%;
     transform: translateY(-50%);
     padding: 0 34px;
+} */
+
+.controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+    padding: 8px;
+    border-radius: 8px 0px 8px 0px;
+    width: fit-content;
+    background-color: black;
+
+    .chevron {
+        display: flex;
+        cursor: pointer;
+
+        img {
+            filter: brightness(1) invert(1);
+            width: 24px;
+            height: 24px;
+        }
+    }
 }
 
 .icon-outline-chevron-wrapper,
