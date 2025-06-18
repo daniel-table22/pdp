@@ -104,7 +104,7 @@ function getMenuImageUrl(menu) {
     if (menu && Array.isArray(menu.image) && menu.image.length > 0 && menu.image[0].url) {
         return menu.image[0].url;
     }
-    return placeholderImage;
+    //return placeholderImage;
 }
 
 const nextMenuIndex = computed(() => {

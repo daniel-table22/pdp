@@ -151,7 +151,7 @@ onUnmounted(() => {
     flex-direction: column;
     gap: var(--spacing-panel-inner-row-gap);
     justify-content: space-around;
-    padding: 0 52px;
+    padding: 0 24px;
 }
 
 .content {
@@ -216,7 +216,7 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 628px;
+    width: 550px;
 }
 
 .carousel {
