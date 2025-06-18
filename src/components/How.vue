@@ -2,10 +2,9 @@
     <div class="how">
         <Header class="header">How it works</Header>
         <img class="diagram" :src="diagramSrc" alt="How it works" />
-        <!-- <img class="diagram" :src="restaurant.png" alt="How it works" /> -->
         <div class="allergies body">
             <hr>
-            Travel plans? We’re flexible, skip or cancel anytime
+            Travel plans? We're flexible, skip or cancel anytime
         </div>
     </div>
 </template>
@@ -14,9 +13,9 @@
 import Header from './atoms/Header.vue'
 import { computed } from 'vue'
 import { useBusinessStore } from '../stores/business'
-// import wineDesktop from '@/assets/images/wine_desktop.svg'
-// import mealDesktop from '@/assets/images/meal_desktop.svg'
-import restaurant from '@/assets/images/restaurant.png'
+import wineDesktop from '@/assets/images/wine_desktop.svg'
+import mealDesktop from '@/assets/images/meal_desktop.svg'
+import retailDesktop from '@/assets/images/retail_desktop.svg'
 import steps from '@/assets/images/steps.svg'
 
 const businessStore = useBusinessStore()
@@ -25,11 +24,11 @@ const currentBusiness = computed(() => businessStore.currentBusiness)
 const diagramSrc = computed(() => {
     switch (currentBusiness.value?.businessType) {
         case 'wine':
-            return restaurant
+            return wineDesktop
         case 'restaurant':
-            return restaurant
+            return mealDesktop
         case 'shop':
-            return restaurant
+            return retailDesktop
         default:
             return steps
     }
