@@ -7,7 +7,7 @@
           {{ currentBusiness?.supportingDescription || fallbackDescription }}
         </div>
         <div class="owner body bold">
-          {{ currentBusiness?.supportingChefname || fallbackChefName }}
+          <!-- {{ currentBusiness?.supportingChefname || fallbackChefName }} -->
         </div>
       </div>
     </div>
