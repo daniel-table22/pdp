@@ -81,11 +81,15 @@ onMounted(async () => {
       if (business) {
         businessStore.setCurrentBusiness(business)
         console.log('Selected business from route:', business.heroRestaurantName)
+        updatePageTitle()
       } else {
         console.warn('Business not found for ID:', route.params.id)
         businessStore.clearCurrentBusiness()
         showNoPartnerModal.value = true
+        updatePageTitle()
       }
+    } else {
+      updatePageTitle()
     }
   } catch (e) {
     console.error('Failed to fetch businesses:', e)
@@ -103,14 +107,24 @@ watch(
         businessStore.setCurrentBusiness(business)
         console.log('Updated business from route change:', business.heroRestaurantName)
         showNoPartnerModal.value = false
+        updatePageTitle()
       } else {
         console.warn('Business not found for route ID:', newId)
         businessStore.clearCurrentBusiness()
         showNoPartnerModal.value = true
+        updatePageTitle()
       }
     }
   },
   { immediate: true }
+)
+
+// Watch for changes in current business to update title
+watch(
+  () => businessStore.currentBusiness,
+  () => {
+    updatePageTitle()
+  }
 )
 
 const handleKeyPress = (event) => {
@@ -131,6 +145,16 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeyPress)
 })
+
+// Update page title based on current business
+const updatePageTitle = () => {
+  const currentBusiness = businessStore.currentBusiness
+  if (currentBusiness) {
+    document.title = `${currentBusiness.heroRestaurantName}`
+  } else {
+    document.title = 'Membership'
+  }
+}
 </script>
 
 <style scoped>
