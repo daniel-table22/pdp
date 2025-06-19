@@ -3,8 +3,11 @@
         <div class="tile-top">
             <div class="icon">
                 <slot name="icon">
-                    <span v-if="isDelivery" class="icon-svg"><img src="../../assets/images/car.svg" alt="Car" /></span>
-                    <span v-else class="icon-svg"><img src="../../assets/images/home.svg" alt="Home" /></span>
+                    <span v-if="isPickup" class="icon-svg"><img src="../../assets/images/car.svg" alt="Car" /></span>
+                    <span v-else-if="isDelivery" class="icon-svg"><img src="../../assets/images/home.svg"
+                            alt="Home" /></span>
+                    <span v-else-if="isShipping" class="icon-svg"><img src="../../assets/images/plane.svg"
+                            alt="Plane" /></span>
                 </slot>
             </div>
             <div class="checkmark">
@@ -33,9 +36,15 @@ const props = defineProps({
 })
 
 const isDelivery = computed(() => {
-    // crude check: if title or price contains 'delivery', treat as delivery
-    return (props.title && props.title.toLowerCase().includes('delivery')) ||
-        (props.price && props.price.toLowerCase().includes('delivery'))
+    return props.title && props.title.toLowerCase() === 'delivery'
+})
+
+const isPickup = computed(() => {
+    return props.title && props.title.toLowerCase() === 'pickup'
+})
+
+const isShipping = computed(() => {
+    return props.title && props.title.toLowerCase() === 'shipping'
 })
 </script>
 
