@@ -53,13 +53,21 @@ onMounted(async () => {
     console.log('Full Strapi API response:', data)
     console.log('Supporting Media in response:', data.data?.[0]?.attributes?.supportingMedia)
     businessStore.setBusinesses(data.data)
+
     // After businesses are loaded, select the business from the route if present
     if (route.params.id) {
       const business = businessStore.businesses.find(b => b.id == route.params.id)
-      if (business) businessStore.setCurrentBusiness(business)
+      if (business) {
+        businessStore.setCurrentBusiness(business)
+        console.log('Selected business from route:', business.heroRestaurantName)
+      } else {
+        console.warn('Business not found for ID:', route.params.id)
+      }
+    } else {
+      // If no route ID, redirect to the first business or show a default
+      console.log('No route ID, using first business')
     }
   } catch (e) {
-    // handle error if needed
     console.error('Failed to fetch businesses:', e)
   }
 })
@@ -67,12 +75,19 @@ onMounted(async () => {
 // Watch for route changes and update the selected business
 watch(
   () => route.params.id,
-  (id) => {
-    if (id) {
-      const business = businessStore.businesses.find(b => b.id == id)
-      if (business) businessStore.setCurrentBusiness(business)
+  (newId, oldId) => {
+    console.log('Route changed from', oldId, 'to', newId)
+    if (newId && businessStore.businesses.length > 0) {
+      const business = businessStore.businesses.find(b => b.id == newId)
+      if (business) {
+        businessStore.setCurrentBusiness(business)
+        console.log('Updated business from route change:', business.heroRestaurantName)
+      } else {
+        console.warn('Business not found for route ID:', newId)
+      }
     }
-  }
+  },
+  { immediate: true }
 )
 
 const handleKeyPress = (event) => {

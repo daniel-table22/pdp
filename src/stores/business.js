@@ -56,11 +56,18 @@ export const useBusinessStore = defineStore('business', {
   actions: {
     setBusinesses(data) {
       this.businesses = data
+      // If no current business is set and we have businesses, set the first one
+      if (this.businesses.length > 0 && this.currentIndex >= this.businesses.length) {
+        this.currentIndex = 0
+      }
     },
     setCurrentBusiness(business) {
       const index = this.businesses.findIndex(b => b.id === business.id)
       if (index !== -1) {
         this.currentIndex = index
+        console.log('Business store: Set current business to index', index, business.heroRestaurantName)
+      } else {
+        console.warn('Business store: Business not found in list:', business.id)
       }
     },
     next() {
