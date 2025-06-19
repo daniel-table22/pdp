@@ -70,6 +70,10 @@ export const useBusinessStore = defineStore('business', {
         console.warn('Business store: Business not found in list:', business.id)
       }
     },
+    clearCurrentBusiness() {
+      this.currentIndex = -1
+      console.log('Business store: Cleared current business')
+    },
     next() {
       if (this.businesses.length > 0) {
         this.currentIndex = (this.currentIndex + 1) % this.businesses.length
@@ -82,13 +86,13 @@ export const useBusinessStore = defineStore('business', {
     }
   },
   getters: {
-    currentBusiness: (state) => state.businesses[state.currentIndex] || null,
-    currentLogo: (state) => state.businesses[state.currentIndex]?.logo || null,
-    currentHeroCarousel: (state) => state.businesses[state.currentIndex]?.heroCarousel || [],
-    currentPerks: (state) => state.businesses[state.currentIndex]?.perks || [],
-    currentReviews: (state) => state.businesses[state.currentIndex]?.reviews || [],
-    currentMenus: (state) => state.businesses[state.currentIndex]?.menus || [],
-    currentVariantGroup: (state) => state.businesses[state.currentIndex]?.variantGroup || [],
-    currentDelivery: (state) => state.businesses[state.currentIndex]?.delivery || []
+    currentBusiness: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex] ? state.businesses[state.currentIndex] : null,
+    currentLogo: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex]?.logo ? state.businesses[state.currentIndex].logo : null,
+    currentHeroCarousel: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex]?.heroCarousel ? state.businesses[state.currentIndex].heroCarousel : [],
+    currentPerks: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex]?.perks ? state.businesses[state.currentIndex].perks : [],
+    currentReviews: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex]?.reviews ? state.businesses[state.currentIndex].reviews : [],
+    currentMenus: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex]?.menus ? state.businesses[state.currentIndex].menus : [],
+    currentVariantGroup: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex]?.variantGroup ? state.businesses[state.currentIndex].variantGroup : [],
+    currentDelivery: (state) => state.currentIndex >= 0 && state.businesses[state.currentIndex]?.delivery ? state.businesses[state.currentIndex].delivery : []
   }
 }) 
