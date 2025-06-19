@@ -12,7 +12,8 @@
       </div>
     </div>
     <div class="right">
-      <img :src="supportingMediaUrl || defaultImage" :alt="supportingMedia?.alternativeText || 'Who'" />
+      <img v-if="!isVideo" :src="supportingMediaUrl || defaultImage" :alt="supportingMedia?.alternativeText || 'Who'" />
+      <video v-else :src="supportingMediaUrl" controls :alt="supportingMedia?.alternativeText || 'Who'"></video>
     </div>
   </div>
 </template>
@@ -37,8 +38,15 @@ const supportingMediaUrl = computed(() => {
   const url = mediaObj?.url
     ? getStrapiMedia(mediaObj.url)
     : null;
-  console.log('Supporting Media Image URL:', url);
+  console.log('Supporting Media URL:', url);
   return url;
+})
+
+const isVideo = computed(() => {
+  const url = supportingMediaUrl.value;
+  if (!url) return false;
+  const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi'];
+  return videoExtensions.some(ext => url.toLowerCase().includes(ext));
 })
 
 const fallbackDescription = '-- Placeholder --'
@@ -90,9 +98,10 @@ const fallbackChefName = '-- Placeholder --'
   overflow: hidden;
 }
 
-.right img {
+.right img,
+.right video {
   height: 388px;
-  width: auto;
+  width: 100%;
   object-fit: cover;
   object-position: center;
 }
