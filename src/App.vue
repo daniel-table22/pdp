@@ -3,7 +3,7 @@
     <div v-if="showBusinessSelector" class="business-selector">
       <router-link v-for="business in businessStore.businesses" :key="business.id" :to="`/business/${business.id}`"
         class="business-link" :class="{ active: businessStore.currentBusiness?.id === business.id }">
-        {{ business.heroRestaurantName }}
+        {{ business.heroRestaurantName }} (ID: {{ business.id }})
       </router-link>
     </div>
     <div class="content" :class="{ 'with-menu': showBusinessSelector }">
@@ -150,9 +150,9 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   background: var(--color-background-panel);
-  padding: 16px;
+  padding: 12px;
   display: flex;
-  gap: 16px;
+  gap: 8px;
   z-index: 1000;
   border-bottom: 1px solid var(--color-controls-inactive-stroke);
 }
@@ -160,9 +160,10 @@ onUnmounted(() => {
 .business-link {
   color: var(--color-foreground-secondary);
   text-decoration: none;
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 8px;
   transition: all 0.2s ease;
+  font-size: 14px;
 }
 
 .business-link:hover {
