@@ -24,7 +24,8 @@
       <div class="modal" @click.stop>
         <h2>No Partner Found</h2>
         <p>There is no partner at this address.</p>
-        <p class="partner-id">Partner ID: {{ route.params.id }}</p>
+        <p v-if="route.params.id" class="partner-id">Partner ID: {{ route.params.id }}</p>
+        <p v-else class="partner-id">No Partner ID provided</p>
         <button @click="closeNoPartnerModal" class="close-button">Close</button>
       </div>
     </div>
@@ -89,6 +90,10 @@ onMounted(async () => {
         updatePageTitle()
       }
     } else {
+      // No partner ID in URL, show error modal
+      console.warn('No partner ID provided in URL')
+      businessStore.clearCurrentBusiness()
+      showNoPartnerModal.value = true
       updatePageTitle()
     }
   } catch (e) {
